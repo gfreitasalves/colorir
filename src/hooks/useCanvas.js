@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useUndo } from './useUndo'
 import { floodFill, hexToRgba } from '../utils/drawingUtils'
 import {
-  loadSvgToCanvas,
+  loadImageFileToCanvas,
   loadImage as loadImageAsset,
   getMergedImageData,
   saveDraft,
@@ -13,6 +13,7 @@ export function useCanvas() {
   const baseCanvasRef = useRef(null)
   const drawCanvasRef = useRef(null)
   const currentImageIdRef = useRef(null)
+  const [imageSize, setImageSize] = useState({ width: 800, height: 800 })
 
   const { present, canUndo, canRedo, undo, redo, set, reset: resetHistory } = useUndo(null)
 
@@ -40,9 +41,10 @@ export function useCanvas() {
       currentImageIdRef.current = imageObj.id
       const baseCanvas = baseCanvasRef.current
       const drawCanvas = drawCanvasRef.current
-      await loadSvgToCanvas(baseCanvas, imageObj.svg, imageObj.largura, imageObj.altura)
-      drawCanvas.width = imageObj.largura
-      drawCanvas.height = imageObj.altura
+      const { width, height } = await loadImageFileToCanvas(baseCanvas, imageObj.url)
+      setImageSize({ width, height })
+      drawCanvas.width = width
+      drawCanvas.height = height
       const dctx = drawCanvas.getContext('2d')
       dctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height)
       if (draftDataUrl) {
@@ -88,6 +90,7 @@ export function useCanvas() {
   return {
     baseCanvasRef,
     drawCanvasRef,
+    imageSize,
     loadImageToCanvas,
     fillAt,
     resetCanvas,

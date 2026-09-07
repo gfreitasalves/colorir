@@ -1,7 +1,3 @@
-export function svgToDataUri(svgString) {
-  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgString)}`
-}
-
 export function loadImage(src) {
   return new Promise((resolve, reject) => {
     const img = new Image()
@@ -11,14 +7,25 @@ export function loadImage(src) {
   })
 }
 
-export async function loadSvgToCanvas(canvas, svgString, width, height) {
+const MAX_DIMENSION = 1400
+
+export function fitDimensions(naturalWidth, naturalHeight, maxDimension = MAX_DIMENSION) {
+  const scale = Math.min(1, maxDimension / Math.max(naturalWidth, naturalHeight))
+  return {
+    width: Math.max(1, Math.round(naturalWidth * scale)),
+    height: Math.max(1, Math.round(naturalHeight * scale)),
+  }
+}
+
+export async function loadImageFileToCanvas(canvas, url) {
   const ctx = canvas.getContext('2d')
-  const img = await loadImage(svgToDataUri(svgString))
+  const img = await loadImage(url)
+  const { width, height } = fitDimensions(img.naturalWidth || img.width, img.naturalHeight || img.height)
   canvas.width = width
   canvas.height = height
   ctx.clearRect(0, 0, width, height)
   ctx.drawImage(img, 0, 0, width, height)
-  return ctx
+  return { ctx, width, height }
 }
 
 function mergedCanvas(baseCanvas, drawCanvas) {
