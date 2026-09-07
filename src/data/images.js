@@ -151,48 +151,134 @@ function tiara(cx, topY, width = 70) {
 
 // ---------- Sereias ----------
 
-function mermaidHead(cx, cy, hair = 'long') {
-  let out = circle(cx, cy, 44)
-  if (hair === 'long') {
-    out += pathTag(`M ${N(cx - 42)} ${N(cy - 12)} Q ${N(cx - 70)} ${N(cy + 70)} ${N(cx - 38)} ${N(cy + 170)}`)
-    out += pathTag(`M ${N(cx + 42)} ${N(cy - 12)} Q ${N(cx + 70)} ${N(cy + 70)} ${N(cx + 38)} ${N(cy + 170)}`)
-  } else if (hair === 'wavy') {
-    out += pathTag(
-      `M ${N(cx - 42)} ${N(cy - 8)} Q ${N(cx - 80)} ${N(cy + 30)} ${N(cx - 55)} ${N(cy + 75)} Q ${N(cx - 78)} ${N(cy + 115)} ${N(cx - 45)} ${N(cy + 150)}`
-    )
-    out += pathTag(
-      `M ${N(cx + 42)} ${N(cy - 8)} Q ${N(cx + 80)} ${N(cy + 30)} ${N(cx + 55)} ${N(cy + 75)} Q ${N(cx + 78)} ${N(cy + 115)} ${N(cx + 45)} ${N(cy + 150)}`
-    )
-  } else {
-    out += pathTag(`M ${N(cx - 42)} ${N(cy - 10)} Q ${N(cx - 58)} ${N(cy + 25)} ${N(cx - 30)} ${N(cy + 55)}`)
-    out += pathTag(`M ${N(cx + 42)} ${N(cy - 10)} Q ${N(cx + 58)} ${N(cy + 25)} ${N(cx + 30)} ${N(cy + 55)}`)
+function scaleRow(xLeft, xRight, y, count, bump) {
+  const step = (xRight - xLeft) / count
+  let d = ''
+  for (let i = 0; i < count; i++) {
+    const x1 = xLeft + step * i
+    const x2 = x1 + step
+    d += `M ${N(x1)} ${N(y)} Q ${N((x1 + x2) / 2)} ${N(y + bump)} ${N(x2)} ${N(y)} `
   }
-  out += dot(cx - 14, cy - 4, 4) + dot(cx + 14, cy - 4, 4)
-  return out
+  return pathTag(d)
 }
 
-function mermaidTorso(cx, headCy, waistY) {
-  const shoulderY = headCy + 50
-  return pathTag(
-    `M ${N(cx - 38)} ${N(shoulderY)} Q ${N(cx - 52)} ${N((shoulderY + waistY) / 2)} ${N(cx - 30)} ${N(waistY)} L ${N(cx + 30)} ${N(waistY)} Q ${N(cx + 52)} ${N((shoulderY + waistY) / 2)} ${N(cx + 38)} ${N(shoulderY)} Z`
+function mermaidFace(cx, cy) {
+  const r = 60
+  const face = circle(cx, cy, r)
+  const eyeY = cy + 8
+  const eyeL = dot(cx - 19, eyeY, 9.5)
+  const eyeR = dot(cx + 19, eyeY, 9.5)
+  const hlL = `<circle cx="${N(cx - 15)}" cy="${N(eyeY - 4)}" r="3" fill="#fff" />`
+  const hlR = `<circle cx="${N(cx + 23)}" cy="${N(eyeY - 4)}" r="3" fill="#fff" />`
+  const lashL = pathTag(`M ${N(cx - 31)} ${N(eyeY - 7)} Q ${N(cx - 21)} ${N(eyeY - 16)} ${N(cx - 11)} ${N(eyeY - 9)}`)
+  const lashR = pathTag(`M ${N(cx + 11)} ${N(eyeY - 9)} Q ${N(cx + 21)} ${N(eyeY - 16)} ${N(cx + 31)} ${N(eyeY - 7)}`)
+  const browL = pathTag(`M ${N(cx - 30)} ${N(eyeY - 22)} Q ${N(cx - 19)} ${N(eyeY - 28)} ${N(cx - 8)} ${N(eyeY - 22)}`)
+  const browR = pathTag(`M ${N(cx + 8)} ${N(eyeY - 22)} Q ${N(cx + 19)} ${N(eyeY - 28)} ${N(cx + 30)} ${N(eyeY - 22)}`)
+  const nose = pathTag(`M ${N(cx - 4)} ${N(cy + 13)} Q ${N(cx)} ${N(cy + 18)} ${N(cx + 4)} ${N(cy + 13)}`)
+  const smile = pathTag(`M ${N(cx - 13)} ${N(cy + 27)} Q ${N(cx)} ${N(cy + 38)} ${N(cx + 13)} ${N(cy + 27)}`)
+  const blushL = circle(cx - 40, cy + 23, 7)
+  const blushR = circle(cx + 40, cy + 23, 7)
+  return face + eyeL + eyeR + hlL + hlR + lashL + lashR + browL + browR + nose + smile + blushL + blushR
+}
+
+function mermaidHair(cx, cy, r = 60) {
+  const cap = pathTag(
+    `M ${N(cx - r * 0.95)} ${N(cy - r * 0.1)} Q ${N(cx - r * 0.6)} ${N(cy - r * 1.35)} ${N(cx)} ${N(cy - r * 1.25)} Q ${N(cx + r * 0.7)} ${N(cy - r * 1.15)} ${N(cx + r * 0.95)} ${N(cy - r * 0.15)}`
+  )
+  const lockL = pathTag(
+    `M ${N(cx - r * 0.95)} ${N(cy - r * 0.1)} ` +
+      `Q ${N(cx - r * 1.3)} ${N(cy + r * 0.6)} ${N(cx - r * 1.1)} ${N(cy + r * 1.4)} ` +
+      `Q ${N(cx - r * 1.35)} ${N(cy + r * 2.3)} ${N(cx - r * 1.0)} ${N(cy + r * 3.2)} ` +
+      `Q ${N(cx - r * 0.8)} ${N(cy + r * 3.9)} ${N(cx - r * 0.55)} ${N(cy + r * 3.3)} ` +
+      `Q ${N(cx - r * 0.7)} ${N(cy + r * 2.2)} ${N(cx - r * 0.5)} ${N(cy + r * 1.1)} ` +
+      `Q ${N(cx - r * 0.6)} ${N(cy + r * 0.3)} ${N(cx - r * 0.35)} ${N(cy - r * 0.35)} Z`
+  )
+  const lockR = pathTag(
+    `M ${N(cx + r * 0.95)} ${N(cy - r * 0.1)} ` +
+      `Q ${N(cx + r * 1.3)} ${N(cy + r * 0.6)} ${N(cx + r * 1.1)} ${N(cy + r * 1.4)} ` +
+      `Q ${N(cx + r * 1.35)} ${N(cy + r * 2.3)} ${N(cx + r * 1.0)} ${N(cy + r * 3.2)} ` +
+      `Q ${N(cx + r * 0.8)} ${N(cy + r * 3.9)} ${N(cx + r * 0.55)} ${N(cy + r * 3.3)} ` +
+      `Q ${N(cx + r * 0.7)} ${N(cy + r * 2.2)} ${N(cx + r * 0.5)} ${N(cy + r * 1.1)} ` +
+      `Q ${N(cx + r * 0.6)} ${N(cy + r * 0.3)} ${N(cx + r * 0.35)} ${N(cy - r * 0.35)} Z`
+  )
+  const bang = pathTag(`M ${N(cx - r * 0.15)} ${N(cy - r * 1.05)} Q ${N(cx + r * 0.2)} ${N(cy - r * 0.75)} ${N(cx + r * 0.15)} ${N(cy - r * 0.3)}`)
+  const strandL = pathTag(`M ${N(cx - r * 0.85)} ${N(cy + r * 1.0)} Q ${N(cx - r * 0.95)} ${N(cy + r * 2.0)} ${N(cx - r * 0.8)} ${N(cy + r * 2.9)}`)
+  const strandR = pathTag(`M ${N(cx + r * 0.85)} ${N(cy + r * 1.0)} Q ${N(cx + r * 0.95)} ${N(cy + r * 2.0)} ${N(cx + r * 0.8)} ${N(cy + r * 2.9)}`)
+  return cap + lockL + lockR + bang + strandL + strandR
+}
+
+function shellTop(cx, y, width = 90) {
+  const cupW = width * 0.42
+  const leftCup = pathTag(
+    `M ${N(cx - 5)} ${N(y + 8)} Q ${N(cx - cupW)} ${N(y - 8)} ${N(cx - cupW * 0.85)} ${N(y + 16)} Q ${N(cx - cupW * 0.45)} ${N(y + 30)} ${N(cx - 5)} ${N(y + 16)} Z`
+  )
+  const rightCup = pathTag(
+    `M ${N(cx + 5)} ${N(y + 8)} Q ${N(cx + cupW)} ${N(y - 8)} ${N(cx + cupW * 0.85)} ${N(y + 16)} Q ${N(cx + cupW * 0.45)} ${N(y + 30)} ${N(cx + 5)} ${N(y + 16)} Z`
+  )
+  const bow = pathTag(`M ${N(cx - 16)} ${N(y + 2)} L ${N(cx)} ${N(y + 12)} L ${N(cx + 16)} ${N(y + 2)} M ${N(cx)} ${N(y + 12)} L ${N(cx)} ${N(y + 22)}`)
+  const shellLinesL = lineTag(cx - cupW * 0.55, y + 2, cx - cupW * 0.3, y + 18) + lineTag(cx - cupW * 0.75, y + 6, cx - cupW * 0.5, y + 20)
+  const shellLinesR = lineTag(cx + cupW * 0.55, y + 2, cx + cupW * 0.3, y + 18) + lineTag(cx + cupW * 0.75, y + 6, cx + cupW * 0.5, y + 20)
+  return leftCup + rightCup + bow + shellLinesL + shellLinesR
+}
+
+function mermaidArms(cx, shoulderY, waistY, spread = 1) {
+  const armY = shoulderY + (waistY - shoulderY) * 0.5
+  const handY = waistY - 4
+  return (
+    pathTag(`M ${N(cx - 42)} ${N(shoulderY + 8)} Q ${N(cx - 76 * spread)} ${N(armY)} ${N(cx - 50 * spread)} ${N(handY)}`) +
+    pathTag(`M ${N(cx + 42)} ${N(shoulderY + 8)} Q ${N(cx + 76 * spread)} ${N(armY)} ${N(cx + 50 * spread)} ${N(handY)}`)
   )
 }
 
-function mermaidTail(cx, waistY, { length = 250, width = 65, finWidth = 170 } = {}) {
-  const bottomY = waistY + length
+function mermaidBody(cx, shoulderY, { torsoLen = 110, tailLen = 260, shoulderW = 46, waistW = 32, hipW = 86, finSpan = 230 } = {}) {
+  const waistY = shoulderY + torsoLen
+  const hipY = waistY + tailLen * 0.28
+  const kneeY = waistY + tailLen * 0.6
+  const bottomY = waistY + tailLen
   const body = pathTag(
-    `M ${N(cx - width)} ${N(waistY)} Q ${N(cx - width * 0.65)} ${N(waistY + length * 0.6)} ${N(cx - width * 0.3)} ${N(bottomY)} L ${N(cx + width * 0.3)} ${N(bottomY)} Q ${N(cx + width * 0.65)} ${N(waistY + length * 0.6)} ${N(cx + width)} ${N(waistY)} Z`
+    `M ${N(cx - shoulderW)} ${N(shoulderY)} ` +
+      `Q ${N(cx - shoulderW * 0.9)} ${N(shoulderY + torsoLen * 0.55)} ${N(cx - waistW)} ${N(waistY)} ` +
+      `Q ${N(cx - hipW * 0.62)} ${N(hipY)} ${N(cx - hipW * 0.5)} ${N(hipY + 18)} ` +
+      `Q ${N(cx - waistW * 0.9)} ${N(kneeY)} ${N(cx - 28)} ${N(bottomY)} ` +
+      `L ${N(cx + 28)} ${N(bottomY)} ` +
+      `Q ${N(cx + waistW * 0.9)} ${N(kneeY)} ${N(cx + hipW * 0.5)} ${N(hipY + 18)} ` +
+      `Q ${N(cx + hipW * 0.62)} ${N(hipY)} ${N(cx + waistW)} ${N(waistY)} ` +
+      `Q ${N(cx + shoulderW * 0.9)} ${N(shoulderY + torsoLen * 0.55)} ${N(cx + shoulderW)} ${N(shoulderY)} Z`
   )
-  const finL = poly(`${N(cx - width * 0.3)},${N(bottomY)} ${N(cx - finWidth / 2)},${N(bottomY + 45)} ${N(cx - 8)},${N(bottomY + 12)}`)
-  const finR = poly(`${N(cx + width * 0.3)},${N(bottomY)} ${N(cx + finWidth / 2)},${N(bottomY + 45)} ${N(cx + 8)},${N(bottomY + 12)}`)
-  const arcs = [0.35, 0.6, 0.85]
-    .map((f) => {
-      const yy = waistY + length * f
-      const ww = width * (1 - f * 0.6)
-      return pathTag(`M ${N(cx - ww)} ${N(yy)} Q ${N(cx)} ${N(yy + 18)} ${N(cx + ww)} ${N(yy)}`)
-    })
+  const finTipY = bottomY + finSpan * 0.36
+  const finL = pathTag(
+    `M ${N(cx - 28)} ${N(bottomY)} Q ${N(cx - finSpan * 0.56)} ${N(bottomY + 6)} ${N(cx - finSpan * 0.48)} ${N(finTipY)} Q ${N(cx - finSpan * 0.22)} ${N(bottomY + finSpan * 0.14)} ${N(cx - 8)} ${N(bottomY + 16)} Z`
+  )
+  const finR = pathTag(
+    `M ${N(cx + 28)} ${N(bottomY)} Q ${N(cx + finSpan * 0.56)} ${N(bottomY + 6)} ${N(cx + finSpan * 0.48)} ${N(finTipY)} Q ${N(cx + finSpan * 0.22)} ${N(bottomY + finSpan * 0.14)} ${N(cx + 8)} ${N(bottomY + 16)} Z`
+  )
+  const finRibs =
+    lineTag(cx - finSpan * 0.3, bottomY + 26, cx - finSpan * 0.4, finTipY - 14) + lineTag(cx + finSpan * 0.3, bottomY + 26, cx + finSpan * 0.4, finTipY - 14)
+  const rows = [
+    [waistY + 14, waistW * 1.05, 5],
+    [hipY + 8, hipW * 0.55, 8],
+    [hipY + 48, hipW * 0.44, 7],
+    [kneeY - 8, waistW * 1.15, 6],
+    [kneeY + 32, waistW * 0.95, 5],
+  ]
+    .map(([y, halfW, count]) => scaleRow(cx - halfW, cx + halfW, y, count, 11))
     .join('')
-  return body + finL + finR + arcs
+  return { svg: body + rows + finL + finR + finRibs, waistY, hipY, kneeY, bottomY }
+}
+
+function mermaidFigure(cx, headCy, bodyOpts = {}, armSpread = 0.85) {
+  const r = 60
+  const shoulderY = headCy + 78
+  const hair = mermaidHair(cx, headCy, r)
+  const face = mermaidFace(cx, headCy)
+  const { svg: bodySvg, waistY, bottomY } = mermaidBody(cx, shoulderY, bodyOpts)
+  const top = shellTop(cx, shoulderY + 16)
+  const armsEl = mermaidArms(cx, shoulderY, waistY, armSpread)
+  return { svg: bodySvg + armsEl + top + hair + face, shoulderY, waistY, bottomY, r }
+}
+
+function sparkle(cx, cy, r) {
+  return star(cx, cy, 4, r, r * 0.35)
 }
 
 function dolphin(cx, cy, scale = 1, flip = false) {
@@ -206,49 +292,48 @@ function dolphin(cx, cy, scale = 1, flip = false) {
 }
 
 function img001() {
-  const rock = poly('180,700 150,540 300,460 470,480 560,600 520,700')
-  const head = mermaidHead(430, 260, 'long')
-  const torso = mermaidTorso(430, 260, 380)
-  const tail = mermaidTail(430, 380, { length: 230, width: 60 })
-  const shell = shellFan(300, 640, 30)
-  const bub = bubblesAt([
-    [600, 300, 14],
-    [640, 360, 10],
-    [580, 230, 8],
-  ])
-  const algae = seaweed(680, 720, 140) + seaweed(120, 720, 100, -18)
-  return svgWrap(rock + algae + tail + torso + head + shell + bub)
+  const rock = poly('160,760 140,560 310,470 490,490 590,610 550,760')
+  const { svg: figure } = mermaidFigure(400, 190, { tailLen: 250, finSpan: 210 })
+  const shell = shellFan(250, 690, 28)
+  const bub = [
+    [640, 260, 14],
+    [670, 330, 10],
+    [600, 190, 8],
+  ]
+    .map(([x, y, r]) => circle(x, y, r))
+    .join('')
+  const algae = seaweed(700, 770, 140) + seaweed(110, 770, 100, -18)
+  return svgWrap(rock + algae + figure + shell + bub)
 }
 
 function img002() {
-  const head = mermaidHead(400, 220, 'wavy')
-  const torso = mermaidTorso(400, 220, 330)
-  const tail = mermaidTail(400, 330, { length: 280, width: 75, finWidth: 200 })
-  const rays = [300, 400, 500].map((x) => lineTag(x, 40, x - 40, 300)).join('')
-  const bub = bubblesAt([
-    [550, 200, 10],
-    [580, 260, 14],
-    [520, 150, 8],
-    [600, 320, 10],
-  ])
-  const fish = [
-    [180, 500],
-    [220, 560],
+  const { svg: figure } = mermaidFigure(400, 180, { tailLen: 320, finSpan: 280 }, 1.05)
+  const rays = [280, 400, 520].map((x) => lineTag(x, 20, x - 50, 260)).join('')
+  const bub = [
+    [600, 180, 10],
+    [630, 250, 14],
+    [570, 120, 8],
+    [650, 320, 10],
   ]
-    .map(([x, y]) => circle(x, y, 18) + poly(`${x - 18},${y} ${x - 32},${y - 10} ${x - 32},${y + 10}`))
+    .map(([x, y, r]) => circle(x, y, r))
     .join('')
-  return svgWrap(rays + tail + torso + head + bub + fish)
+  const fish = [
+    [150, 480],
+    [190, 550],
+  ]
+    .map(([x, y]) => circle(x, y, 16) + poly(`${x - 16},${y} ${x - 28},${y - 9} ${x - 28},${y + 9}`))
+    .join('')
+  const spark = sparkle(660, 420, 14) + sparkle(140, 620, 12)
+  return svgWrap(rays + figure + bub + fish + spark)
 }
 
 function img003() {
-  const head = mermaidHead(320, 300, 'long')
-  const torso = mermaidTorso(320, 300, 410)
-  const tail = mermaidTail(320, 410, { length: 220, width: 60 })
-  const dol = dolphin(560, 340, 1.3, true)
+  const { svg: figure } = mermaidFigure(300, 260, { tailLen: 230, finSpan: 200 })
+  const dol = dolphin(590, 320, 1.25, true)
   const corals = [
-    [150, 650, 'a'],
-    [650, 680, 'b'],
-    [400, 700, 'a'],
+    [150, 720, 'a'],
+    [650, 740, 'b'],
+    [420, 760, 'a'],
   ]
     .map(([x, y, t]) =>
       t === 'a'
@@ -256,51 +341,55 @@ function img003() {
         : circle(x, y - 20, 25)
     )
     .join('')
-  const bub = bubblesAt([
-    [500, 200, 10],
-    [470, 150, 7],
-    [540, 250, 12],
-  ])
-  const pearls = bubblesAt([
-    [250, 550, 9],
-    [280, 600, 7],
-    [220, 600, 7],
-  ])
-  return svgWrap(corals + tail + torso + head + dol + bub + pearls)
+  const bub = [
+    [520, 200, 10],
+    [490, 150, 7],
+    [560, 250, 12],
+  ]
+    .map(([x, y, r]) => circle(x, y, r))
+    .join('')
+  const pearls = [
+    [180, 560, 9],
+    [210, 610, 7],
+    [150, 610, 7],
+  ]
+    .map(([x, y, r]) => circle(x, y, r))
+    .join('')
+  return svgWrap(corals + figure + dol + bub + pearls)
 }
 
 function img004() {
-  const throneL = poly('260,700 240,420 300,380 320,700')
-  const throneR = poly('540,700 560,420 500,380 480,700')
-  const seat = rectTag(300, 600, 200, 60, 10)
-  const head = mermaidHead(400, 260, 'long')
-  const crownEl = crownShape(400, 190, 90, 55)
-  const torso = mermaidTorso(400, 260, 390)
-  const tail = mermaidTail(400, 390, { length: 200, width: 70 })
-  const jewels = bubblesAt([
-    [280, 500, 10],
-    [520, 500, 10],
-    [240, 600, 8],
-    [560, 600, 8],
-  ])
-  const guard1 = dolphin(150, 450, 0.8, false)
-  const guard2 = dolphin(650, 450, 0.8, true)
-  return svgWrap(throneL + throneR + seat + tail + torso + head + crownEl + jewels + guard1 + guard2)
+  const throneL = poly('250,780 230,440 300,390 330,780')
+  const throneR = poly('550,780 570,440 500,390 470,780')
+  const seat = rectTag(300, 660, 200, 60, 10)
+  const { svg: figure } = mermaidFigure(400, 190, { torsoLen: 100, tailLen: 220, finSpan: 190 })
+  const crownEl = crownShape(400, 95, 100, 55)
+  const jewels = [
+    [260, 560, 10],
+    [540, 560, 10],
+    [220, 660, 8],
+    [580, 660, 8],
+  ]
+    .map(([x, y, r]) => circle(x, y, r))
+    .join('')
+  const guard1 = dolphin(140, 480, 0.75, false)
+  const guard2 = dolphin(660, 480, 0.75, true)
+  return svgWrap(throneL + throneR + seat + figure + crownEl + jewels + guard1 + guard2)
 }
 
 function img005() {
-  const head = mermaidHead(400, 260, 'short')
-  const tiaraEl = tiara(400, 214)
-  const torso = mermaidTorso(400, 260, 380)
-  const tail = mermaidTail(400, 380, { length: 230, width: 55, finWidth: 150 })
-  const bub = bubblesAt([
-    [550, 300, 10],
-    [580, 360, 8],
-    [520, 240, 7],
-  ])
-  const plant1 = seaweed(160, 720, 120, 15)
-  const plant2 = seaweed(650, 720, 90, -15)
-  return svgWrap(plant1 + plant2 + tail + torso + tiaraEl + head + bub)
+  const { svg: figure } = mermaidFigure(400, 200, { tailLen: 240, finSpan: 190 }, 0.75)
+  const tiaraEl = tiara(400, 148, 60)
+  const bub = [
+    [600, 300, 10],
+    [630, 360, 8],
+    [570, 240, 7],
+  ]
+    .map(([x, y, r]) => circle(x, y, r))
+    .join('')
+  const plant1 = seaweed(180, 770, 130, 15)
+  const plant2 = seaweed(630, 770, 100, -15)
+  return svgWrap(plant1 + plant2 + figure + tiaraEl + bub)
 }
 
 // ---------- Princesas ----------
