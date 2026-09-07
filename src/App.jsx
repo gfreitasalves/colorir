@@ -86,7 +86,13 @@ export default function App() {
   return (
     <div className="flex h-dvh flex-col overflow-hidden bg-gray-100 dark:bg-gray-900">
       <div className="shrink-0">
-        <Header view={view} imageTitle={selectedImage?.titulo} darkMode={darkMode} onToggleDarkMode={() => setDarkMode((d) => !d)} />
+        <Header
+          view={view}
+          categoryTitle={selectedImage?.categoriaNome}
+          imageTitle={selectedImage?.titulo}
+          darkMode={darkMode}
+          onToggleDarkMode={() => setDarkMode((d) => !d)}
+        />
       </div>
 
       {view === 'gallery' && (

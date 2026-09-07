@@ -1,13 +1,16 @@
-export default function Header({ view, imageTitle, darkMode, onToggleDarkMode }) {
+export default function Header({ view, categoryTitle, imageTitle, darkMode, onToggleDarkMode }) {
+  const crumbs = ['Galeria']
+  if (view === 'editor') {
+    if (categoryTitle) crumbs.push(categoryTitle)
+    if (imageTitle) crumbs.push(imageTitle)
+  }
   return (
     <header className="flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3 dark:border-gray-700 dark:bg-gray-800">
       <div>
         <h1 className="text-lg font-bold text-gray-800 dark:text-gray-100">
           🎨 Colorir<span className="text-brand-blue">App</span>
         </h1>
-        <p className="text-xs text-gray-500 dark:text-gray-400">
-          Galeria{view === 'editor' && imageTitle ? ` > ${imageTitle}` : ''}
-        </p>
+        <p className="text-xs text-gray-500 dark:text-gray-400">{crumbs.join(' > ')}</p>
       </div>
       <button
         type="button"
