@@ -1,0 +1,18 @@
+export const presetColors = [
+  { id: 'cor_001', nome: 'Vermelho Vibrante', hex: '#EF4444', categoria: 'quentes' },
+  { id: 'cor_002', nome: 'Laranja', hex: '#F97316', categoria: 'quentes' },
+  { id: 'cor_003', nome: 'Amarelo', hex: '#FACC15', categoria: 'quentes' },
+  { id: 'cor_004', nome: 'Rosa', hex: '#EC4899', categoria: 'quentes' },
+  { id: 'cor_005', nome: 'Verde', hex: '#22C55E', categoria: 'frias' },
+  { id: 'cor_006', nome: 'Verde Água', hex: '#14B8A6', categoria: 'frias' },
+  { id: 'cor_007', nome: 'Azul', hex: '#3B82F6', categoria: 'frias' },
+  { id: 'cor_008', nome: 'Azul Marinho', hex: '#1D4ED8', categoria: 'frias' },
+  { id: 'cor_009', nome: 'Roxo', hex: '#8B5CF6', categoria: 'frias' },
+  { id: 'cor_010', nome: 'Marrom', hex: '#92400E', categoria: 'neutras' },
+  { id: 'cor_011', nome: 'Cinza', hex: '#6B7280', categoria: 'neutras' },
+  { id: 'cor_012', nome: 'Preto', hex: '#111827', categoria: 'neutras' },
+  { id: 'cor_013', nome: 'Branco', hex: '#FFFFFF', categoria: 'neutras' },
+  { id: 'cor_014', nome: 'Pêssego', hex: '#FDBA74', categoria: 'pastel' },
+  { id: 'cor_015', nome: 'Lilás', hex: '#C4B5FD', categoria: 'pastel' },
+  { id: 'cor_016', nome: 'Menta', hex: '#A7F3D0', categoria: 'pastel' },
+]
