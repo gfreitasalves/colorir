@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react'
 import Header from './components/Header'
 import Gallery from './components/Gallery'
 import Palette from './components/Palette'
-import BrushControls from './components/BrushControls'
 import Toolbar from './components/Toolbar'
 import Canvas from './components/Canvas'
 import ColorPicker from './components/ColorPicker'
@@ -13,12 +12,8 @@ import { loadDraft, exportImage } from './utils/imageUtils'
 export default function App() {
   const [view, setView] = useState('gallery')
   const [selectedImage, setSelectedImage] = useState(null)
-  const [brushSize, setBrushSize] = useState(24)
-  const [opacity, setOpacity] = useState(1)
-  const [mode, setMode] = useState('brush')
-  const [zoom, setZoom] = useState(1)
   const [pickerOpen, setPickerOpen] = useState(false)
-  const [mobilePanel, setMobilePanel] = useState(null)
+  const [paletteOpen, setPaletteOpen] = useState(false)
   const [darkMode, setDarkMode] = useState(() => {
     try {
       return localStorage.getItem('colorir:darkMode') === 'true'
@@ -41,7 +36,6 @@ export default function App() {
 
   const handleSelectImage = useCallback((image) => {
     setSelectedImage(image)
-    setZoom(1)
     setView('editor')
   }, [])
 
@@ -89,8 +83,6 @@ export default function App() {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [view, canvas])
 
-  const brush = { size: brushSize, opacity, mode, color: selectedColor }
-
   return (
     <div className="flex h-screen flex-col bg-gray-100 dark:bg-gray-900">
       <Header view={view} imageTitle={selectedImage?.titulo} darkMode={darkMode} onToggleDarkMode={() => setDarkMode((d) => !d)} />
@@ -111,8 +103,6 @@ export default function App() {
             canRedo={canvas.canRedo}
             onReset={handleReset}
             onSave={handleSave}
-            zoom={zoom}
-            onZoomChange={setZoom}
           />
 
           <div className="flex flex-1 overflow-hidden">
@@ -126,45 +116,24 @@ export default function App() {
                 drawCanvasRef={canvas.drawCanvasRef}
                 width={selectedImage.largura}
                 height={selectedImage.altura}
-                zoom={zoom}
-                brush={brush}
-                onStartStroke={(p) => canvas.startStroke(p, brush)}
-                onContinueStroke={(p) => canvas.continueStroke(p, brush)}
-                onEndStroke={canvas.endStroke}
-                onFill={(p) => canvas.fillAt(p, selectedColor, opacity)}
+                onFill={(p) => canvas.fillAt(p, selectedColor)}
               />
-            </div>
-
-            <div className="hidden md:block">
-              <BrushControls size={brushSize} onSizeChange={setBrushSize} opacity={opacity} onOpacityChange={setOpacity} mode={mode} onModeChange={setMode} />
             </div>
           </div>
 
           <nav className="flex border-t border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800 md:hidden">
             <button
               type="button"
-              onClick={() => setMobilePanel(mobilePanel === 'palette' ? null : 'palette')}
+              onClick={() => setPaletteOpen((o) => !o)}
               className="flex-1 py-3 text-sm font-medium text-gray-700 dark:text-gray-200"
             >
               🎨 Cores
             </button>
-            <button
-              type="button"
-              onClick={() => setMobilePanel(mobilePanel === 'brush' ? null : 'brush')}
-              className="flex-1 border-l border-gray-200 py-3 text-sm font-medium text-gray-700 dark:border-gray-700 dark:text-gray-200"
-            >
-              🖌️ Pincel
-            </button>
           </nav>
 
-          {mobilePanel && (
-            <div className="fixed inset-x-0 bottom-14 z-40 max-h-[60vh] overflow-y-auto border-t border-gray-200 shadow-2xl md:hidden">
-              {mobilePanel === 'palette' && (
-                <Palette selectedColor={selectedColor} onSelectColor={selectColor} history={history} onOpenPicker={() => setPickerOpen(true)} />
-              )}
-              {mobilePanel === 'brush' && (
-                <BrushControls size={brushSize} onSizeChange={setBrushSize} opacity={opacity} onOpacityChange={setOpacity} mode={mode} onModeChange={setMode} />
-              )}
+          {paletteOpen && (
+            <div className="fixed inset-x-0 bottom-12 z-40 max-h-[60vh] overflow-y-auto border-t border-gray-200 shadow-2xl md:hidden">
+              <Palette selectedColor={selectedColor} onSelectColor={selectColor} history={history} onOpenPicker={() => setPickerOpen(true)} />
             </div>
           )}
         </>
