@@ -6,6 +6,7 @@ html,
 body,
 #root {
   height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -18,10 +19,6 @@ body {
 .dark body {
   background-color: #111827;
   color: #f3f4f6;
-}
-
-.canvas-cursor-none {
-  cursor: none;
 }
 
 .no-scrollbar::-webkit-scrollbar {
