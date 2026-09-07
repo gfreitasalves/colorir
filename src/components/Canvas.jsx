@@ -1,7 +1,22 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { getEventPoint } from '../utils/drawingUtils'
 
 export default function Canvas({ baseCanvasRef, drawCanvasRef, width, height, onFill }) {
+  const measureRef = useRef(null)
+  const [size, setSize] = useState(0)
+
+  useEffect(() => {
+    const el = measureRef.current
+    if (!el) return
+    const updateSize = () => {
+      setSize(Math.max(0, Math.floor(Math.min(el.clientWidth, el.clientHeight))))
+    }
+    updateSize()
+    const observer = new ResizeObserver(updateSize)
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   const handleClick = useCallback(
     (evt) => {
       const canvas = drawCanvasRef.current
@@ -12,13 +27,16 @@ export default function Canvas({ baseCanvasRef, drawCanvasRef, width, height, on
   )
 
   return (
-    <div className="flex h-full w-full items-center justify-center overflow-auto bg-gray-200 p-4 dark:bg-gray-900">
-      <div
-        className="relative aspect-square w-full max-w-[min(800px,100%)] cursor-pointer touch-none select-none shadow-lg"
-        onClick={handleClick}
-      >
-        <canvas ref={baseCanvasRef} width={width} height={height} className="absolute left-0 top-0 h-full w-full bg-white" />
-        <canvas ref={drawCanvasRef} width={width} height={height} className="absolute left-0 top-0 h-full w-full" />
+    <div className="flex h-full w-full items-center justify-center overflow-hidden bg-gray-200 p-4 dark:bg-gray-900">
+      <div ref={measureRef} className="flex h-full w-full items-center justify-center">
+        <div
+          className="relative cursor-pointer touch-none select-none shadow-lg"
+          style={{ width: size, height: size }}
+          onClick={handleClick}
+        >
+          <canvas ref={baseCanvasRef} width={width} height={height} className="absolute left-0 top-0 h-full w-full bg-white" />
+          <canvas ref={drawCanvasRef} width={width} height={height} className="absolute left-0 top-0 h-full w-full" />
+        </div>
       </div>
     </div>
   )

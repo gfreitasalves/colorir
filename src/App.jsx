@@ -84,8 +84,10 @@ export default function App() {
   }, [view, canvas])
 
   return (
-    <div className="flex h-screen flex-col bg-gray-100 dark:bg-gray-900">
-      <Header view={view} imageTitle={selectedImage?.titulo} darkMode={darkMode} onToggleDarkMode={() => setDarkMode((d) => !d)} />
+    <div className="flex h-dvh flex-col overflow-hidden bg-gray-100 dark:bg-gray-900">
+      <div className="shrink-0">
+        <Header view={view} imageTitle={selectedImage?.titulo} darkMode={darkMode} onToggleDarkMode={() => setDarkMode((d) => !d)} />
+      </div>
 
       {view === 'gallery' && (
         <main className="flex-1 overflow-y-auto">
@@ -95,22 +97,24 @@ export default function App() {
 
       {view === 'editor' && selectedImage && (
         <>
-          <Toolbar
-            onBack={handleBackToGallery}
-            onUndo={canvas.undo}
-            canUndo={canvas.canUndo}
-            onRedo={canvas.redo}
-            canRedo={canvas.canRedo}
-            onReset={handleReset}
-            onSave={handleSave}
-          />
+          <div className="shrink-0">
+            <Toolbar
+              onBack={handleBackToGallery}
+              onUndo={canvas.undo}
+              canUndo={canvas.canUndo}
+              onRedo={canvas.redo}
+              canRedo={canvas.canRedo}
+              onReset={handleReset}
+              onSave={handleSave}
+            />
+          </div>
 
-          <div className="flex flex-1 overflow-hidden">
+          <div className="flex min-h-0 flex-1 overflow-hidden">
             <div className="hidden md:block">
               <Palette selectedColor={selectedColor} onSelectColor={selectColor} history={history} onOpenPicker={() => setPickerOpen(true)} />
             </div>
 
-            <div className="flex-1 overflow-hidden">
+            <div className="min-h-0 flex-1 overflow-hidden">
               <Canvas
                 baseCanvasRef={canvas.baseCanvasRef}
                 drawCanvasRef={canvas.drawCanvasRef}
@@ -121,11 +125,11 @@ export default function App() {
             </div>
           </div>
 
-          <nav className="flex border-t border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800 md:hidden">
+          <nav className="flex h-12 shrink-0 border-t border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800 md:hidden">
             <button
               type="button"
               onClick={() => setPaletteOpen((o) => !o)}
-              className="flex-1 py-3 text-sm font-medium text-gray-700 dark:text-gray-200"
+              className="flex flex-1 items-center justify-center text-sm font-medium text-gray-700 dark:text-gray-200"
             >
               🎨 Cores
             </button>
