@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from 'react'
-import { presetColors } from '../data/presetColors'
+import { colorFamilies } from '../data/presetColors'
 import { loadColorHistory, saveColorHistory } from '../utils/imageUtils'
 import { colorsEqual, normalizeHex } from '../utils/colorUtils'
 
 const MAX_HISTORY = 8
 
 export function useColor() {
-  const [selectedColor, setSelectedColor] = useState(presetColors[0].hex)
+  const [selectedColor, setSelectedColor] = useState(colorFamilies[0].cores[1].hex)
   const [history, setHistory] = useState(() => loadColorHistory())
   const [customColors, setCustomColors] = useState([])
 

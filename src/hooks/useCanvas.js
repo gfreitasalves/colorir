@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react'
 import { useUndo } from './useUndo'
-import { drawBrushSegment, floodFill, hexToRgba } from '../utils/drawingUtils'
+import { floodFill, hexToRgba } from '../utils/drawingUtils'
 import {
   loadSvgToCanvas,
   loadImage as loadImageAsset,
@@ -12,9 +12,6 @@ import {
 export function useCanvas() {
   const baseCanvasRef = useRef(null)
   const drawCanvasRef = useRef(null)
-  const isDrawingRef = useRef(false)
-  const lastPointRef = useRef(null)
-  const strokeDirtyRef = useRef(false)
   const currentImageIdRef = useRef(null)
 
   const { present, canUndo, canRedo, undo, redo, set, reset: resetHistory } = useUndo(null)
@@ -62,38 +59,14 @@ export function useCanvas() {
     [resetHistory]
   )
 
-  const startStroke = useCallback((point, settings) => {
-    isDrawingRef.current = true
-    lastPointRef.current = point
-    strokeDirtyRef.current = true
-    const ctx = drawCanvasRef.current.getContext('2d')
-    drawBrushSegment(ctx, point, point, settings)
-  }, [])
-
-  const continueStroke = useCallback((point, settings) => {
-    if (!isDrawingRef.current) return
-    const ctx = drawCanvasRef.current.getContext('2d')
-    drawBrushSegment(ctx, lastPointRef.current, point, settings)
-    lastPointRef.current = point
-  }, [])
-
-  const endStroke = useCallback(() => {
-    if (isDrawingRef.current && strokeDirtyRef.current) {
-      pushSnapshot()
-    }
-    isDrawingRef.current = false
-    strokeDirtyRef.current = false
-    lastPointRef.current = null
-  }, [pushSnapshot])
-
   const fillAt = useCallback(
-    (point, colorHex, opacity) => {
+    (point, colorHex) => {
       const drawCanvas = drawCanvasRef.current
       const baseCanvas = baseCanvasRef.current
       const dctx = drawCanvas.getContext('2d')
       const sample = getMergedImageData(baseCanvas, drawCanvas)
       const target = dctx.getImageData(0, 0, drawCanvas.width, drawCanvas.height)
-      const fillRgba = hexToRgba(colorHex, opacity)
+      const fillRgba = hexToRgba(colorHex)
       const changed = floodFill(sample.data, target.data, drawCanvas.width, drawCanvas.height, point.x, point.y, fillRgba, 40)
       if (changed) {
         dctx.putImageData(target, 0, 0)
@@ -116,9 +89,6 @@ export function useCanvas() {
     baseCanvasRef,
     drawCanvasRef,
     loadImageToCanvas,
-    startStroke,
-    continueStroke,
-    endStroke,
     fillAt,
     resetCanvas,
     undo,

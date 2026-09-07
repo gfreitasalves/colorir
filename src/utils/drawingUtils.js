@@ -12,25 +12,6 @@ export function getEventPoint(canvas, evt) {
   }
 }
 
-export function drawBrushSegment(ctx, from, to, { size, color, opacity, mode }) {
-  ctx.save()
-  ctx.lineCap = 'round'
-  ctx.lineJoin = 'round'
-  ctx.lineWidth = size
-  ctx.globalAlpha = mode === 'eraser' ? 1 : opacity
-  ctx.globalCompositeOperation = mode === 'eraser' ? 'destination-out' : 'source-over'
-  ctx.strokeStyle = color
-  ctx.beginPath()
-  ctx.moveTo(from.x, from.y)
-  ctx.lineTo(to.x, to.y)
-  ctx.stroke()
-  ctx.beginPath()
-  ctx.arc(to.x, to.y, size / 2, 0, Math.PI * 2)
-  ctx.fillStyle = color
-  ctx.fill()
-  ctx.restore()
-}
-
 function colorAt(data, idx) {
   return [data[idx], data[idx + 1], data[idx + 2], data[idx + 3]]
 }

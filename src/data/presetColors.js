@@ -1,18 +1,74 @@
-export const presetColors = [
-  { id: 'cor_001', nome: 'Vermelho Vibrante', hex: '#EF4444', categoria: 'quentes' },
-  { id: 'cor_002', nome: 'Laranja', hex: '#F97316', categoria: 'quentes' },
-  { id: 'cor_003', nome: 'Amarelo', hex: '#FACC15', categoria: 'quentes' },
-  { id: 'cor_004', nome: 'Rosa', hex: '#EC4899', categoria: 'quentes' },
-  { id: 'cor_005', nome: 'Verde', hex: '#22C55E', categoria: 'frias' },
-  { id: 'cor_006', nome: 'Verde Água', hex: '#14B8A6', categoria: 'frias' },
-  { id: 'cor_007', nome: 'Azul', hex: '#3B82F6', categoria: 'frias' },
-  { id: 'cor_008', nome: 'Azul Marinho', hex: '#1D4ED8', categoria: 'frias' },
-  { id: 'cor_009', nome: 'Roxo', hex: '#8B5CF6', categoria: 'frias' },
-  { id: 'cor_010', nome: 'Marrom', hex: '#92400E', categoria: 'neutras' },
-  { id: 'cor_011', nome: 'Cinza', hex: '#6B7280', categoria: 'neutras' },
-  { id: 'cor_012', nome: 'Preto', hex: '#111827', categoria: 'neutras' },
-  { id: 'cor_013', nome: 'Branco', hex: '#FFFFFF', categoria: 'neutras' },
-  { id: 'cor_014', nome: 'Pêssego', hex: '#FDBA74', categoria: 'pastel' },
-  { id: 'cor_015', nome: 'Lilás', hex: '#C4B5FD', categoria: 'pastel' },
-  { id: 'cor_016', nome: 'Menta', hex: '#A7F3D0', categoria: 'pastel' },
+export const colorFamilies = [
+  {
+    id: 'vermelho',
+    nome: 'Vermelho',
+    cores: [
+      { hex: '#FCA5A5', nome: 'Vermelho Claro' },
+      { hex: '#EF4444', nome: 'Vermelho' },
+      { hex: '#B91C1C', nome: 'Vermelho Escuro' },
+    ],
+  },
+  {
+    id: 'laranja',
+    nome: 'Laranja',
+    cores: [
+      { hex: '#FDBA74', nome: 'Laranja Claro' },
+      { hex: '#F97316', nome: 'Laranja' },
+      { hex: '#C2410C', nome: 'Laranja Escuro' },
+    ],
+  },
+  {
+    id: 'amarelo',
+    nome: 'Amarelo',
+    cores: [
+      { hex: '#FDE68A', nome: 'Amarelo Claro' },
+      { hex: '#FACC15', nome: 'Amarelo' },
+      { hex: '#CA8A04', nome: 'Amarelo Escuro' },
+    ],
+  },
+  {
+    id: 'verde',
+    nome: 'Verde',
+    cores: [
+      { hex: '#86EFAC', nome: 'Verde Claro' },
+      { hex: '#22C55E', nome: 'Verde' },
+      { hex: '#15803D', nome: 'Verde Escuro' },
+    ],
+  },
+  {
+    id: 'azul',
+    nome: 'Azul',
+    cores: [
+      { hex: '#93C5FD', nome: 'Azul Claro' },
+      { hex: '#3B82F6', nome: 'Azul' },
+      { hex: '#1D4ED8', nome: 'Azul Escuro' },
+    ],
+  },
+  {
+    id: 'roxo',
+    nome: 'Roxo',
+    cores: [
+      { hex: '#C4B5FD', nome: 'Roxo Claro' },
+      { hex: '#8B5CF6', nome: 'Roxo' },
+      { hex: '#6D28D9', nome: 'Roxo Escuro' },
+    ],
+  },
+  {
+    id: 'rosa',
+    nome: 'Rosa',
+    cores: [
+      { hex: '#F9A8D4', nome: 'Rosa Claro' },
+      { hex: '#EC4899', nome: 'Rosa' },
+      { hex: '#BE185D', nome: 'Rosa Escuro' },
+    ],
+  },
+  {
+    id: 'neutro',
+    nome: 'Neutro',
+    cores: [
+      { hex: '#FFFFFF', nome: 'Branco' },
+      { hex: '#9CA3AF', nome: 'Cinza' },
+      { hex: '#111827', nome: 'Preto' },
+    ],
+  },
 ]

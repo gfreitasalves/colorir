@@ -1,4 +1,4 @@
-import { presetColors } from '../data/presetColors'
+import { colorFamilies } from '../data/presetColors'
 import { colorsEqual } from '../utils/colorUtils'
 
 function Swatch({ hex, selected, onClick, label }) {
@@ -8,7 +8,7 @@ function Swatch({ hex, selected, onClick, label }) {
       aria-label={label || hex}
       title={label || hex}
       onClick={onClick}
-      className={`h-9 w-9 rounded-full border-2 transition-transform hover:scale-110 ${
+      className={`h-9 w-9 shrink-0 rounded-full border-2 transition-transform hover:scale-110 ${
         selected ? 'border-brand-blue ring-2 ring-brand-blue ring-offset-2' : 'border-gray-300 dark:border-gray-600'
       }`}
       style={{ backgroundColor: hex }}
@@ -21,15 +21,14 @@ export default function Palette({ selectedColor, onSelectColor, history, onOpenP
     <aside className="flex h-full w-full flex-col gap-4 overflow-y-auto bg-white p-4 dark:bg-gray-800 md:w-56">
       <div>
         <h2 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-200">Paleta de Cores</h2>
-        <div className="grid grid-cols-4 gap-2">
-          {presetColors.map((c) => (
-            <Swatch
-              key={c.id}
-              hex={c.hex}
-              label={c.nome}
-              selected={colorsEqual(c.hex, selectedColor)}
-              onClick={() => onSelectColor(c.hex)}
-            />
+        <div className="flex flex-col gap-2">
+          {colorFamilies.map((family) => (
+            <div key={family.id} className="flex items-center gap-2">
+              {family.cores.map((c) => (
+                <Swatch key={c.hex} hex={c.hex} label={c.nome} selected={colorsEqual(c.hex, selectedColor)} onClick={() => onSelectColor(c.hex)} />
+              ))}
+              <span className="ml-1 truncate text-xs text-gray-500 dark:text-gray-400">{family.nome}</span>
+            </div>
           ))}
         </div>
       </div>
