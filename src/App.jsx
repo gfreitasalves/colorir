@@ -126,6 +126,7 @@ export default function App() {
                 drawCanvasRef={canvas.drawCanvasRef}
                 width={canvas.imageSize.width}
                 height={canvas.imageSize.height}
+                color={selectedColor}
                 onFill={(p) => canvas.fillAt(p, selectedColor)}
               />
             </div>

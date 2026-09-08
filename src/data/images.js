@@ -26,7 +26,7 @@ const categoryMeta = {
 
 // Cada arquivo colocado em src/assets/images/<categoria>/ aparece
 // automaticamente na galeria — não precisa editar nenhum código.
-const modules = import.meta.glob('/src/assets/images/*/*.{png,jpg,jpeg,webp,gif,svg,PNG,JPG,JPEG,WEBP,GIF,SVG}', {
+const modules = import.meta.glob('/src/assets/images/*/*.{png,jpg,jpeg,jfif,webp,gif,svg,PNG,JPG,JPEG,JFIF,WEBP,GIF,SVG}', {
   eager: true,
   import: 'default',
 })
