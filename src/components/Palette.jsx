@@ -21,15 +21,12 @@ export default function Palette({ selectedColor, onSelectColor, history, onOpenP
     <aside className="flex h-full w-full flex-col gap-4 overflow-y-auto bg-white p-4 dark:bg-gray-800 md:w-56">
       <div>
         <h2 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-200">Paleta de Cores</h2>
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2">
           {colorFamilies.map((family) => (
-            <div key={family.id}>
-              <p className="mb-1 text-xs font-medium text-gray-500 dark:text-gray-400">{family.nome}</p>
-              <div className="flex gap-2">
-                {family.cores.map((c) => (
-                  <Swatch key={c.hex} hex={c.hex} label={c.nome} selected={colorsEqual(c.hex, selectedColor)} onClick={() => onSelectColor(c.hex)} />
-                ))}
-              </div>
+            <div key={family.id} className="flex gap-2">
+              {family.cores.map((c) => (
+                <Swatch key={c.hex} hex={c.hex} label={c.nome} selected={colorsEqual(c.hex, selectedColor)} onClick={() => onSelectColor(c.hex)} />
+              ))}
             </div>
           ))}
         </div>
