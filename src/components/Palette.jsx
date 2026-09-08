@@ -1,5 +1,6 @@
 import { colorFamilies } from '../data/presetColors'
 import { colorsEqual } from '../utils/colorUtils'
+import { PaletteIcon, BrushIcon } from './icons/PaletteBrushIcons'
 
 function Swatch({ hex, selected, onClick, label }) {
   return (
@@ -20,7 +21,11 @@ export default function Palette({ selectedColor, onSelectColor, history, onOpenP
   return (
     <aside className="flex h-full w-full flex-col gap-4 overflow-y-auto bg-white p-4 dark:bg-gray-800 md:w-56">
       <div>
-        <h2 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-200">Paleta de Cores</h2>
+        <h2 className="mb-2 flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
+          <PaletteIcon size={24} />
+          Paleta de Cores
+          <BrushIcon size={18} />
+        </h2>
         <div className="flex flex-col gap-2">
           {colorFamilies.map((family) => (
             <div key={family.id} className="flex gap-2">
