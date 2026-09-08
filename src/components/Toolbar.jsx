@@ -1,3 +1,5 @@
+import { PaletteIcon, BrushIcon } from './icons/PaletteBrushIcons'
+
 function ToolButton({ onClick, disabled, label, children }) {
   return (
     <button
@@ -16,6 +18,7 @@ function ToolButton({ onClick, disabled, label, children }) {
 export default function Toolbar({ onBack, onUndo, canUndo, onRedo, canRedo, onReset, onSave }) {
   return (
     <div className="flex flex-wrap items-center gap-2 border-b border-gray-200 bg-white px-4 py-2 dark:border-gray-700 dark:bg-gray-800">
+      <PaletteIcon size={26} className="hidden sm:block" />
       <ToolButton onClick={onBack} label="Voltar para a galeria">
         ← Galeria
       </ToolButton>
@@ -35,7 +38,8 @@ export default function Toolbar({ onBack, onUndo, canUndo, onRedo, canRedo, onRe
         🗑 Limpar
       </ToolButton>
 
-      <div className="ml-auto">
+      <div className="ml-auto flex items-center gap-2">
+        <BrushIcon size={24} className="hidden sm:block" />
         <button
           type="button"
           onClick={onSave}

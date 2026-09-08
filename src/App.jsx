@@ -8,6 +8,7 @@ import ColorPicker from './components/ColorPicker'
 import { useCanvas } from './hooks/useCanvas'
 import { useColor } from './hooks/useColor'
 import { loadDraft, exportImage } from './utils/imageUtils'
+import { watermarkBackground } from './utils/watermark'
 
 export default function App() {
   const [view, setView] = useState('gallery')
@@ -84,7 +85,10 @@ export default function App() {
   }, [view, canvas])
 
   return (
-    <div className="flex h-dvh flex-col overflow-hidden bg-gray-100 dark:bg-gray-900">
+    <div
+      className="flex h-dvh flex-col overflow-hidden bg-gray-100 dark:bg-gray-900"
+      style={{ backgroundImage: watermarkBackground, backgroundRepeat: 'repeat' }}
+    >
       <div className="shrink-0">
         <Header
           view={view}

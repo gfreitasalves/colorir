@@ -1,3 +1,5 @@
+import { PaletteIcon, BrushIcon } from './icons/PaletteBrushIcons'
+
 export default function Header({ view, categoryTitle, imageTitle, darkMode, onToggleDarkMode }) {
   const crumbs = ['Galeria']
   if (view === 'editor') {
@@ -6,11 +8,15 @@ export default function Header({ view, categoryTitle, imageTitle, darkMode, onTo
   }
   return (
     <header className="flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3 dark:border-gray-700 dark:bg-gray-800">
-      <div>
-        <h1 className="text-lg font-bold text-gray-800 dark:text-gray-100">
-          🎨 Colorir<span className="text-brand-blue">App</span>
-        </h1>
-        <p className="text-xs text-gray-500 dark:text-gray-400">{crumbs.join(' > ')}</p>
+      <div className="flex items-center gap-2">
+        <PaletteIcon size={30} />
+        <div>
+          <h1 className="text-lg font-bold text-gray-800 dark:text-gray-100">
+            Colorir<span className="text-brand-blue">App</span>
+          </h1>
+          <p className="text-xs text-gray-500 dark:text-gray-400">{crumbs.join(' > ')}</p>
+        </div>
+        <BrushIcon size={22} className="ml-1 hidden sm:block" />
       </div>
       <button
         type="button"
