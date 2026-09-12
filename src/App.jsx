@@ -15,6 +15,7 @@ export default function App() {
   const [selectedImage, setSelectedImage] = useState(null)
   const [pickerOpen, setPickerOpen] = useState(false)
   const [paletteOpen, setPaletteOpen] = useState(false)
+  const [zoom, setZoom] = useState(1)
   const [darkMode, setDarkMode] = useState(() => {
     try {
       return localStorage.getItem('colorir:darkMode') === 'true'
@@ -44,6 +45,7 @@ export default function App() {
     if (view === 'editor' && selectedImage) {
       const draft = loadDraft(selectedImage.id)
       canvas.loadImageToCanvas(selectedImage, draft)
+      setZoom(1)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [view, selectedImage])
@@ -52,6 +54,14 @@ export default function App() {
     setView('gallery')
     setSelectedImage(null)
   }, [])
+
+  const handleSelectColorMobile = useCallback(
+    (hex) => {
+      selectColor(hex)
+      setPaletteOpen(false)
+    },
+    [selectColor]
+  )
 
   const handleSave = useCallback(() => {
     if (!selectedImage) return
@@ -116,6 +126,8 @@ export default function App() {
               canRedo={canvas.canRedo}
               onReset={handleReset}
               onSave={handleSave}
+              zoom={zoom}
+              onZoomChange={setZoom}
             />
           </div>
 
@@ -132,6 +144,8 @@ export default function App() {
                 height={canvas.imageSize.height}
                 color={selectedColor}
                 onFill={(p) => canvas.fillAt(p, selectedColor)}
+                zoom={zoom}
+                onZoomChange={setZoom}
               />
             </div>
           </div>
@@ -148,7 +162,7 @@ export default function App() {
 
           {paletteOpen && (
             <div className="fixed inset-x-0 bottom-12 z-40 max-h-[60vh] overflow-y-auto border-t border-gray-200 shadow-2xl md:hidden">
-              <Palette selectedColor={selectedColor} onSelectColor={selectColor} history={history} onOpenPicker={() => setPickerOpen(true)} />
+              <Palette selectedColor={selectedColor} onSelectColor={handleSelectColorMobile} history={history} onOpenPicker={() => setPickerOpen(true)} />
             </div>
           )}
         </>
