@@ -4,6 +4,8 @@ Aplicativo web de livro de colorir infantil, feito em React. O usuário escolhe 
 
 Site publicado: https://gfreitasalves.github.io/colorir/
 
+> 🤖 Trabalhando neste repo com Claude (Cowork ou Claude Code)? Veja [CLAUDE.md](./CLAUDE.md) para o processo de especificar → planejar → implementar → testar adotado neste projeto.
+
 ## Funcionalidades
 
 - **[Galeria em categorias](docs/galeria.md)**: 10 categorias temáticas (Sereias, Princesas, Animais, Flores, Castelos, Dinossauros, Galáxia e Espaço, Fadas e Criaturas Mágicas, Mandalas e Padrões, Cidades e Cenários), cada uma com suas imagens.
