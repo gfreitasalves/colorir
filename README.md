@@ -6,16 +6,17 @@ Site publicado: https://gfreitasalves.github.io/colorir/
 
 ## Funcionalidades
 
-- **Galeria em categorias**: 10 categorias temáticas (Sereias, Princesas, Animais, Flores, Castelos, Dinossauros, Galáxia e Espaço, Fadas e Criaturas Mágicas, Mandalas e Padrões, Cidades e Cenários), cada uma com suas imagens.
-- **Colorir por preenchimento (balde)**: clique em uma área do desenho para preenchê-la com a cor selecionada (flood fill com tolerância de cor).
-- **Paleta de 40 cores**: 10 famílias de tons (incluindo tons de pele) com 4 variações cada, no estilo de um estojo escolar infantil, além de um seletor de cor personalizada e histórico de cores usadas recentemente.
-- **Zoom no desenho**: botões de 100% / 150% / 200%, `Ctrl` + roda do mouse, e pinça (pinch-to-zoom) no toque, com rolagem para navegar pela imagem ampliada.
-- **Desfazer / Refazer**: histórico de até 20 passos, com atalhos de teclado (`Ctrl+Z` / `Ctrl+Shift+Z`).
-- **Restaurar imagem original** e **salvar/exportar** o desenho colorido como PNG.
-- **Modo escuro** com preferência salva no navegador.
-- **Totalmente responsivo**: no celular a paleta de cores abre como uma gaveta (bottom sheet) e fecha automaticamente assim que uma cor é escolhida; a altura da tela se ajusta corretamente (sem cortar a paleta atrás da barra de endereço do navegador).
-- **Cursor personalizado** em formato de pincel, com a ponta na cor selecionada.
-- Plano de fundo decorativo com marca d'água de paletas e pincéis, e os mesmos ícones coloridos no cabeçalho, na barra de ferramentas e na paleta.
+- **[Galeria em categorias](docs/galeria.md)**: 10 categorias temáticas (Sereias, Princesas, Animais, Flores, Castelos, Dinossauros, Galáxia e Espaço, Fadas e Criaturas Mágicas, Mandalas e Padrões, Cidades e Cenários), cada uma com suas imagens.
+- **[Colorir por preenchimento (balde)](docs/colorir-preenchimento.md)**: clique em uma área do desenho para preenchê-la com a cor selecionada (flood fill com tolerância de cor).
+- **[Paleta de 40 cores](docs/paleta-de-cores.md)**: 10 famílias de tons (incluindo tons de pele) com 4 variações cada, no estilo de um estojo escolar infantil, além de um seletor de cor personalizada e histórico de cores usadas recentemente.
+- **[Zoom no desenho](docs/zoom.md)**: botões de 100% / 150% / 200%, `Ctrl` + roda do mouse, e pinça (pinch-to-zoom) no toque, com rolagem para navegar pela imagem ampliada.
+- **[Desfazer / Refazer](docs/desfazer-refazer.md)**: histórico de até 20 passos, com atalhos de teclado (`Ctrl+Z` / `Ctrl+Shift+Z`).
+- **[Restaurar imagem original e salvar/exportar](docs/salvar-exportar.md)** o desenho colorido como PNG.
+- **[Modo escuro](docs/modo-escuro.md)** com preferência salva no navegador.
+- **[Totalmente responsivo](docs/responsividade-mobile.md)**: no celular a paleta de cores abre como uma gaveta (bottom sheet) e fecha automaticamente assim que uma cor é escolhida; a altura da tela se ajusta corretamente (sem cortar a paleta atrás da barra de endereço do navegador).
+- **[Identidade visual](docs/identidade-visual.md)**: cursor personalizado em formato de pincel, marca d'água decorativa de paletas e pincéis no plano de fundo, e os mesmos ícones coloridos no cabeçalho, na barra de ferramentas e na paleta.
+
+📄 Veja a [documentação detalhada de cada feature em `docs/`](docs/README.md).
 
 ## Tecnologias
 
@@ -69,7 +70,7 @@ npm run preview   # serve a build de produção localmente
 
 ## Deploy
 
-O deploy é automático: qualquer push na branch `main` dispara o workflow [`deploy-pages.yml`](.github/workflows/deploy-pages.yml), que builda o projeto e publica o conteúdo de `dist/` no GitHub Pages.
+O deploy é automático: qualquer push na branch `main` dispara o workflow [`deploy-pages.yml`](.github/workflows/deploy-pages.yml), que builda o projeto e publica o conteúdo de `dist/` no GitHub Pages. Detalhes em [docs/deploy.md](docs/deploy.md).
 
 ---
 
