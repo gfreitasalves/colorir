@@ -28,7 +28,10 @@ Para qualquer pedido que não seja trivial (uma nova feature, uma mudança de co
 
 - Siga as convenções de código já usadas no projeto (componentes funcionais, hooks customizados, Tailwind para estilo, sem bibliotecas de gerenciamento de estado externas).
 - Textos de interface ficam em português, consistente com o restante do app.
-- Ao alterar uma feature documentada em `docs/`, atualize o arquivo correspondente para refletir o novo comportamento.
+- Documentação e código andam juntos, na mesma mudança — nunca como um passo separado depois:
+  - Alterou o comportamento de uma feature já documentada? Atualize o arquivo correspondente em `docs/` para refletir o novo comportamento.
+  - Criou uma feature nova (que ainda não tem doc)? Crie um novo arquivo em `docs/` para ela, seguindo o padrão dos arquivos existentes, e adicione um link para ele em [docs/README.md](./docs/README.md) e na lista de funcionalidades do [README.md](./README.md#funcionalidades).
+  - Removeu ou substituiu uma feature? Remova ou atualize o doc correspondente — não deixe documentação de algo que não existe mais no app.
 - Commits em português, descrevendo o "porquê" da mudança, não só o "o quê" (veja o [histórico de commits](https://github.com/gfreitasalves/colorir/commits/main) para o estilo esperado).
 
 ### 4. Testar
