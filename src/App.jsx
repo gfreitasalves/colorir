@@ -9,6 +9,7 @@ import { useCanvas } from './hooks/useCanvas'
 import { useColor } from './hooks/useColor'
 import { loadDraft, exportImage } from './utils/imageUtils'
 import { watermarkBackground } from './utils/watermark'
+import { stickers } from './data/stickers'
 
 export default function App() {
   const [view, setView] = useState('gallery')
@@ -17,6 +18,7 @@ export default function App() {
   const [paletteOpen, setPaletteOpen] = useState(false)
   const [zoom, setZoom] = useState(1)
   const [activeTool, setActiveTool] = useState('balde')
+  const [selectedSticker, setSelectedSticker] = useState(stickers[0].id)
   const [darkMode, setDarkMode] = useState(() => {
     try {
       return localStorage.getItem('colorir:darkMode') === 'true'
@@ -63,6 +65,20 @@ export default function App() {
       setPaletteOpen(false)
     },
     [selectColor]
+  )
+
+  const handleSelectStickerMobile = useCallback((id) => {
+    setSelectedSticker(id)
+    setPaletteOpen(false)
+  }, [])
+
+  const handleCanvasClick = useCallback(
+    (point) => {
+      if (activeTool === 'borracha') canvas.fillAt(point, null)
+      else if (activeTool === 'adesivo') canvas.stampAt(point, selectedSticker)
+      else canvas.fillAt(point, selectedColor)
+    },
+    [activeTool, canvas, selectedColor, selectedSticker]
   )
 
   const handleSave = useCallback(() => {
@@ -137,7 +153,16 @@ export default function App() {
 
           <div className="flex min-h-0 flex-1 overflow-hidden">
             <div className="hidden md:block">
-              <Palette selectedColor={selectedColor} onSelectColor={selectColor} history={history} onOpenPicker={() => setPickerOpen(true)} />
+              <Palette
+                selectedColor={selectedColor}
+                onSelectColor={selectColor}
+                history={history}
+                onOpenPicker={() => setPickerOpen(true)}
+                tool={activeTool}
+                stickers={stickers}
+                selectedSticker={selectedSticker}
+                onSelectSticker={setSelectedSticker}
+              />
             </div>
 
             <div className="min-h-0 flex-1 overflow-hidden">
@@ -148,7 +173,7 @@ export default function App() {
                 height={canvas.imageSize.height}
                 color={selectedColor}
                 tool={activeTool}
-                onFill={(p) => canvas.fillAt(p, activeTool === 'borracha' ? null : selectedColor)}
+                onFill={handleCanvasClick}
                 zoom={zoom}
                 onZoomChange={setZoom}
               />
@@ -161,13 +186,22 @@ export default function App() {
               onClick={() => setPaletteOpen((o) => !o)}
               className="flex flex-1 items-center justify-center text-sm font-medium text-gray-700 dark:text-gray-200"
             >
-              🎨 Cores
+              {activeTool === 'adesivo' ? '⭐ Adesivos' : '🎨 Cores'}
             </button>
           </nav>
 
           {paletteOpen && (
             <div className="fixed inset-x-0 bottom-12 z-40 max-h-[60vh] overflow-y-auto border-t border-gray-200 shadow-2xl md:hidden">
-              <Palette selectedColor={selectedColor} onSelectColor={handleSelectColorMobile} history={history} onOpenPicker={() => setPickerOpen(true)} />
+              <Palette
+                selectedColor={selectedColor}
+                onSelectColor={handleSelectColorMobile}
+                history={history}
+                onOpenPicker={() => setPickerOpen(true)}
+                tool={activeTool}
+                stickers={stickers}
+                selectedSticker={selectedSticker}
+                onSelectSticker={handleSelectStickerMobile}
+              />
             </div>
           )}
         </>

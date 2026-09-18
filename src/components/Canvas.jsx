@@ -23,12 +23,26 @@ function eraserCursor() {
   return `url("data:image/svg+xml,${encodeURIComponent(svg)}") 15 22, pointer`
 }
 
+function stickerCursor() {
+  const svg =
+    `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">` +
+    `<polygon points="14,2 17,10 26,10 18.5,15.5 21,24 14,19 7,24 9.5,15.5 2,10 11,10" fill="#FACC15" stroke="#CA8A04" stroke-width="1.5"/>` +
+    `</svg>`
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}") 14 14, pointer`
+}
+
+function cursorForTool(tool, color) {
+  if (tool === 'borracha') return eraserCursor()
+  if (tool === 'adesivo') return stickerCursor()
+  return brushCursor(color)
+}
+
 export default function Canvas({ baseCanvasRef, drawCanvasRef, width, height, color, tool, zoom, onZoomChange, onFill }) {
   const scrollRef = useRef(null)
   const measureRef = useRef(null)
   const pinchRef = useRef(null)
   const [fitSize, setFitSize] = useState({ w: 0, h: 0 })
-  const cursor = useMemo(() => (tool === 'borracha' ? eraserCursor() : brushCursor(color)), [tool, color])
+  const cursor = useMemo(() => cursorForTool(tool, color), [tool, color])
 
   useEffect(() => {
     const el = scrollRef.current
