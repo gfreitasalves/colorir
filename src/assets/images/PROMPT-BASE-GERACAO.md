@@ -39,8 +39,8 @@ SUBJECT:
 
 ## Como usar
 
-1. Copie o bloco acima.
-2. Cole o prompt específico da categoria/personagem logo depois de `SUBJECT:` (os prompts por categoria já foram levantados numa conversa anterior — peça de novo se precisar da lista).
+1. Copie o bloco acima **ou** use direto um dos prompts já prontos (base + assunto combinados) em `src/assets/images/<categoria>/PROMPTS.md` — um arquivo por categoria, com 4 a 10 prompts cada.
+2. Se for montar um prompt novo (personagem/cena que não está nos arquivos prontos), cole o assunto específico logo depois de `SUBJECT:`.
 3. Gere a imagem numa ferramenta com licenciamento compatível com uso público (ver comparativo já discutido — Google Gemini, ChatGPT free e Canva são as opções mais seguras).
 4. Confira visualmente antes de usar: contornos fechados, nenhuma área grudada na vizinha, sem vazamento óbvio de linha.
 5. Teste o preenchimento de fato no app antes de considerar aprovada (abra a imagem no editor e clique em algumas áreas) — a checagem visual sozinha não garante que não há vazamento.
