@@ -8,11 +8,13 @@ import {
   saveDraft,
   clearDraft,
 } from '../utils/imageUtils'
+import { stickers } from '../data/stickers'
 
 export function useCanvas() {
   const baseCanvasRef = useRef(null)
   const drawCanvasRef = useRef(null)
   const currentImageIdRef = useRef(null)
+  const stickerImageCache = useRef({})
   const [imageSize, setImageSize] = useState({ width: 800, height: 800 })
 
   const { present, canUndo, canRedo, undo, redo, set, reset: resetHistory } = useUndo(null)
@@ -90,6 +92,26 @@ export function useCanvas() {
     [pushSnapshot]
   )
 
+  const getStickerImage = useCallback((stickerId) => {
+    if (!stickerImageCache.current[stickerId]) {
+      const sticker = stickers.find((s) => s.id === stickerId)
+      stickerImageCache.current[stickerId] = loadImageAsset(`data:image/svg+xml,${encodeURIComponent(sticker.svg)}`)
+    }
+    return stickerImageCache.current[stickerId]
+  }, [])
+
+  const stampAt = useCallback(
+    async (point, stickerId) => {
+      const drawCanvas = drawCanvasRef.current
+      const dctx = drawCanvas.getContext('2d')
+      const img = await getStickerImage(stickerId)
+      const size = Math.max(28, Math.min(drawCanvas.width, drawCanvas.height) * 0.12)
+      dctx.drawImage(img, point.x - size / 2, point.y - size / 2, size, size)
+      pushSnapshot()
+    },
+    [getStickerImage, pushSnapshot]
+  )
+
   const resetCanvas = useCallback(() => {
     const drawCanvas = drawCanvasRef.current
     const ctx = drawCanvas.getContext('2d')
@@ -105,6 +127,7 @@ export function useCanvas() {
     imageSize,
     loadImageToCanvas,
     fillAt,
+    stampAt,
     resetCanvas,
     undo,
     redo,

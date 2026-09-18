@@ -17,7 +17,48 @@ function Swatch({ hex, selected, onClick, label }) {
   )
 }
 
-export default function Palette({ selectedColor, onSelectColor, history, onOpenPicker }) {
+function StickerButton({ svg, nome, selected, onClick }) {
+  return (
+    <button
+      type="button"
+      aria-label={nome}
+      title={nome}
+      onClick={onClick}
+      className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-lg border-2 bg-white p-2 transition-transform hover:scale-105 dark:bg-gray-700 ${
+        selected ? 'border-brand-blue ring-2 ring-brand-blue ring-offset-2' : 'border-gray-300 dark:border-gray-600'
+      }`}
+      dangerouslySetInnerHTML={{ __html: svg }}
+    />
+  )
+}
+
+export default function Palette({ selectedColor, onSelectColor, history, onOpenPicker, tool, stickers, selectedSticker, onSelectSticker }) {
+  if (tool === 'adesivo') {
+    return (
+      <aside className="flex h-full w-full flex-col gap-4 overflow-y-auto bg-white p-4 dark:bg-gray-800 md:w-56">
+        <div>
+          <h2 className="mb-2 flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
+            <PaletteIcon size={24} />
+            Adesivos
+            <BrushIcon size={18} />
+          </h2>
+          <p className="mb-3 text-xs text-gray-500 dark:text-gray-400">Escolha um adesivo e toque no desenho para carimbá-lo.</p>
+          <div className="flex flex-wrap gap-2">
+            {stickers.map((s) => (
+              <StickerButton
+                key={s.id}
+                svg={s.svg}
+                nome={s.nome}
+                selected={selectedSticker === s.id}
+                onClick={() => onSelectSticker(s.id)}
+              />
+            ))}
+          </div>
+        </div>
+      </aside>
+    )
+  }
+
   return (
     <aside className="flex h-full w-full flex-col gap-4 overflow-y-auto bg-white p-4 dark:bg-gray-800 md:w-56">
       <div>

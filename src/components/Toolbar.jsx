@@ -20,6 +20,7 @@ const ZOOM_LEVELS = [1, 1.5, 2]
 const TOOLS = [
   { id: 'balde', label: 'Balde de tinta', emoji: '🪣' },
   { id: 'borracha', label: 'Borracha', emoji: '🧽' },
+  { id: 'adesivo', label: 'Adesivos', emoji: '⭐' },
 ]
 
 export default function Toolbar({ onBack, onUndo, canUndo, onRedo, canRedo, onReset, onSave, zoom, onZoomChange, tool, onToolChange }) {

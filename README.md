@@ -12,6 +12,7 @@ Site publicado: https://gfreitasalves.github.io/colorir/
 - **[Busca na galeria](docs/busca-galeria.md)** por título, e um botão **["Me surpreenda"](docs/me-surpreenda.md)** que abre uma imagem aleatória.
 - **[Colorir por preenchimento (balde)](docs/colorir-preenchimento.md)**: clique em uma área do desenho para preenchê-la com a cor selecionada (flood fill com tolerância de cor).
 - **[Borracha](docs/borracha.md)**: apaga a coloração de uma área já pintada, sem afetar o resto do desenho.
+- **[Adesivos/carimbos](docs/adesivos.md)**: carimba estrela, coração ou brilho sobre o desenho, em tamanho fixo.
 - **[Paleta de 40 cores](docs/paleta-de-cores.md)**: 10 famílias de tons (incluindo tons de pele) com 4 variações cada, no estilo de um estojo escolar infantil, além de um seletor de cor personalizada e histórico de cores usadas recentemente.
 - **[Zoom no desenho](docs/zoom.md)**: botões de 100% / 150% / 200%, `Ctrl` + roda do mouse, e pinça (pinch-to-zoom) no toque, com rolagem para navegar pela imagem ampliada.
 - **[Desfazer / Refazer](docs/desfazer-refazer.md)**: histórico de até 20 passos, com atalhos de teclado (`Ctrl+Z` / `Ctrl+Shift+Z`).
