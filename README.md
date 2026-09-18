@@ -9,6 +9,7 @@ Site publicado: https://gfreitasalves.github.io/colorir/
 ## Funcionalidades
 
 - **[Galeria em categorias](docs/galeria.md)**: 10 categorias temáticas (Sereias, Princesas, Animais, Flores, Castelos, Dinossauros, Galáxia e Espaço, Fadas e Criaturas Mágicas, Mandalas e Padrões, Cidades e Cenários), cada uma com suas imagens.
+- **[Busca na galeria](docs/busca-galeria.md)** por título, e um botão **["Me surpreenda"](docs/me-surpreenda.md)** que abre uma imagem aleatória.
 - **[Colorir por preenchimento (balde)](docs/colorir-preenchimento.md)**: clique em uma área do desenho para preenchê-la com a cor selecionada (flood fill com tolerância de cor).
 - **[Borracha](docs/borracha.md)**: apaga a coloração de uma área já pintada, sem afetar o resto do desenho.
 - **[Paleta de 40 cores](docs/paleta-de-cores.md)**: 10 famílias de tons (incluindo tons de pele) com 4 variações cada, no estilo de um estojo escolar infantil, além de um seletor de cor personalizada e histórico de cores usadas recentemente.
