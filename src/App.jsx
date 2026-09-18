@@ -10,6 +10,7 @@ import { useColor } from './hooks/useColor'
 import { loadDraft, exportImage } from './utils/imageUtils'
 import { watermarkBackground } from './utils/watermark'
 import { stickers } from './data/stickers'
+import { photoFileToColoringPage } from './utils/edgeDetection'
 
 export default function App() {
   const [view, setView] = useState('gallery')
@@ -19,6 +20,7 @@ export default function App() {
   const [zoom, setZoom] = useState(1)
   const [activeTool, setActiveTool] = useState('balde')
   const [selectedSticker, setSelectedSticker] = useState(stickers[0].id)
+  const [importingPhoto, setImportingPhoto] = useState(false)
   const [darkMode, setDarkMode] = useState(() => {
     try {
       return localStorage.getItem('colorir:darkMode') === 'true'
@@ -53,6 +55,21 @@ export default function App() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [view, selectedImage])
+
+  const handleImportPhoto = useCallback(
+    async (file) => {
+      setImportingPhoto(true)
+      try {
+        const dataUrl = await photoFileToColoringPage(file)
+        handleSelectImage({ id: `import-${Date.now()}`, titulo: 'Minha Foto', url: dataUrl })
+      } catch (err) {
+        window.alert('Não foi possível processar essa foto. Tente outra imagem.')
+      } finally {
+        setImportingPhoto(false)
+      }
+    },
+    [handleSelectImage]
+  )
 
   const handleBackToGallery = useCallback(() => {
     setView('gallery')
@@ -129,7 +146,7 @@ export default function App() {
 
       {view === 'gallery' && (
         <main className="flex-1 overflow-y-auto">
-          <Gallery onSelectImage={handleSelectImage} />
+          <Gallery onSelectImage={handleSelectImage} onImportPhoto={handleImportPhoto} importing={importingPhoto} />
         </main>
       )}
 

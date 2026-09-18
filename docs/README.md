@@ -5,6 +5,7 @@ Cada arquivo abaixo descreve uma funcionalidade do ColorirApp em detalhe: como f
 - [Galeria de imagens](./galeria.md)
 - [Busca/filtro na galeria](./busca-galeria.md)
 - [Botão "Me surpreenda"](./me-surpreenda.md)
+- [Importar foto própria → contorno para colorir](./importar-foto.md)
 - [Colorir por preenchimento (balde)](./colorir-preenchimento.md)
 - [Borracha](./borracha.md)
 - [Adesivos/carimbos](./adesivos.md)
