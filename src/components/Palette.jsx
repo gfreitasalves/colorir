@@ -17,6 +17,12 @@ function Swatch({ hex, selected, onClick, label }) {
   )
 }
 
+const PATTERNS = [
+  { id: 'solido', label: 'Sólido' },
+  { id: 'bolinhas', label: 'Bolinhas' },
+  { id: 'listras', label: 'Listras' },
+]
+
 function StickerButton({ svg, nome, selected, onClick }) {
   return (
     <button
@@ -32,7 +38,18 @@ function StickerButton({ svg, nome, selected, onClick }) {
   )
 }
 
-export default function Palette({ selectedColor, onSelectColor, history, onOpenPicker, tool, stickers, selectedSticker, onSelectSticker }) {
+export default function Palette({
+  selectedColor,
+  onSelectColor,
+  history,
+  onOpenPicker,
+  tool,
+  stickers,
+  selectedSticker,
+  onSelectSticker,
+  selectedPattern,
+  onSelectPattern,
+}) {
   if (tool === 'adesivo') {
     return (
       <aside className="flex h-full w-full flex-col gap-4 overflow-y-auto bg-white p-4 dark:bg-gray-800 md:w-56">
@@ -74,6 +91,27 @@ export default function Palette({ selectedColor, onSelectColor, history, onOpenP
                 <Swatch key={c.hex} hex={c.hex} label={c.nome} selected={colorsEqual(c.hex, selectedColor)} onClick={() => onSelectColor(c.hex)} />
               ))}
             </div>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <span className="mb-1 block text-xs font-medium text-gray-600 dark:text-gray-300">Preenchimento</span>
+        <div className="flex gap-1" role="group" aria-label="Padrão de preenchimento">
+          {PATTERNS.map((p) => (
+            <button
+              key={p.id}
+              type="button"
+              onClick={() => onSelectPattern(p.id)}
+              aria-pressed={selectedPattern === p.id}
+              className={`rounded-md border px-2 py-1 text-xs font-medium ${
+                selectedPattern === p.id
+                  ? 'border-brand-blue bg-brand-blue text-white'
+                  : 'border-gray-300 text-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:text-gray-100 dark:hover:bg-gray-700'
+              }`}
+            >
+              {p.label}
+            </button>
           ))}
         </div>
       </div>

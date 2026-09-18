@@ -28,7 +28,7 @@ export default function App() {
   })
 
   const canvas = useCanvas()
-  const { selectedColor, selectColor, history, addCustomColor } = useColor()
+  const { selectedColor, selectColor, selectedPattern, setSelectedPattern, history, addCustomColor } = useColor()
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode)
@@ -76,9 +76,9 @@ export default function App() {
     (point) => {
       if (activeTool === 'borracha') canvas.fillAt(point, null)
       else if (activeTool === 'adesivo') canvas.stampAt(point, selectedSticker)
-      else canvas.fillAt(point, selectedColor)
+      else canvas.fillAt(point, selectedColor, selectedPattern)
     },
-    [activeTool, canvas, selectedColor, selectedSticker]
+    [activeTool, canvas, selectedColor, selectedPattern, selectedSticker]
   )
 
   const handleSave = useCallback(() => {
@@ -162,6 +162,8 @@ export default function App() {
                 stickers={stickers}
                 selectedSticker={selectedSticker}
                 onSelectSticker={setSelectedSticker}
+                selectedPattern={selectedPattern}
+                onSelectPattern={setSelectedPattern}
               />
             </div>
 
@@ -201,6 +203,8 @@ export default function App() {
                 stickers={stickers}
                 selectedSticker={selectedSticker}
                 onSelectSticker={handleSelectStickerMobile}
+                selectedPattern={selectedPattern}
+                onSelectPattern={setSelectedPattern}
               />
             </div>
           )}

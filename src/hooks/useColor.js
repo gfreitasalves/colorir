@@ -7,6 +7,7 @@ const MAX_HISTORY = 8
 
 export function useColor() {
   const [selectedColor, setSelectedColor] = useState(colorFamilies[0].cores[1].hex)
+  const [selectedPattern, setSelectedPattern] = useState('solido')
   const [history, setHistory] = useState(() => loadColorHistory())
   const [customColors, setCustomColors] = useState([])
 
@@ -34,5 +35,5 @@ export function useColor() {
     [selectColor]
   )
 
-  return { selectedColor, selectColor, history, customColors, addCustomColor }
+  return { selectedColor, selectColor, selectedPattern, setSelectedPattern, history, customColors, addCustomColor }
 }

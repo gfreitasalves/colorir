@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useUndo } from './useUndo'
-import { floodFill, hexToRgba } from '../utils/drawingUtils'
+import { floodFill } from '../utils/drawingUtils'
+import { buildFillColor } from '../utils/patternUtils'
 import {
   loadImageFileToCanvas,
   loadImage as loadImageAsset,
@@ -64,7 +65,7 @@ export function useCanvas() {
   )
 
   const fillAt = useCallback(
-    (point, colorHex) => {
+    (point, colorHex, pattern = 'solido') => {
       const drawCanvas = drawCanvasRef.current
       const baseCanvas = baseCanvasRef.current
       const dctx = drawCanvas.getContext('2d')
@@ -82,8 +83,8 @@ export function useCanvas() {
       }
 
       const sample = getMergedImageData(baseCanvas, drawCanvas)
-      const fillRgba = colorHex ? hexToRgba(colorHex) : [0, 0, 0, 0]
-      const changed = floodFill(sample.data, target.data, drawCanvas.width, drawCanvas.height, point.x, point.y, fillRgba, 40)
+      const fillColor = colorHex ? buildFillColor(colorHex, pattern) : [0, 0, 0, 0]
+      const changed = floodFill(sample.data, target.data, drawCanvas.width, drawCanvas.height, point.x, point.y, fillColor, 40)
       if (changed) {
         dctx.putImageData(target, 0, 0)
         pushSnapshot()
