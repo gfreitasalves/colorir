@@ -4,6 +4,7 @@ Cada arquivo abaixo descreve uma funcionalidade do ColorirApp em detalhe: como f
 
 - [Galeria de imagens](./galeria.md)
 - [Colorir por preenchimento (balde)](./colorir-preenchimento.md)
+- [Borracha](./borracha.md)
 - [Paleta de cores](./paleta-de-cores.md)
 - [Zoom no desenho](./zoom.md)
 - [Desfazer / Refazer](./desfazer-refazer.md)

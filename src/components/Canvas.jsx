@@ -14,12 +14,21 @@ function brushCursor(color) {
   return `url("data:image/svg+xml,${encodeURIComponent(svg)}") 5 27, pointer`
 }
 
-export default function Canvas({ baseCanvasRef, drawCanvasRef, width, height, color, zoom, onZoomChange, onFill }) {
+function eraserCursor() {
+  const svg =
+    `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">` +
+    `<rect x="4" y="16" width="22" height="12" rx="3" fill="#F472B6" stroke="#831843" stroke-width="1.5"/>` +
+    `<rect x="4" y="16" width="11" height="12" rx="3" fill="#FBCFE8" stroke="#831843" stroke-width="1.5"/>` +
+    `</svg>`
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}") 15 22, pointer`
+}
+
+export default function Canvas({ baseCanvasRef, drawCanvasRef, width, height, color, tool, zoom, onZoomChange, onFill }) {
   const scrollRef = useRef(null)
   const measureRef = useRef(null)
   const pinchRef = useRef(null)
   const [fitSize, setFitSize] = useState({ w: 0, h: 0 })
-  const cursor = useMemo(() => brushCursor(color), [color])
+  const cursor = useMemo(() => (tool === 'borracha' ? eraserCursor() : brushCursor(color)), [tool, color])
 
   useEffect(() => {
     const el = scrollRef.current

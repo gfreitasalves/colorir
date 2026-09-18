@@ -16,6 +16,7 @@ export default function App() {
   const [pickerOpen, setPickerOpen] = useState(false)
   const [paletteOpen, setPaletteOpen] = useState(false)
   const [zoom, setZoom] = useState(1)
+  const [activeTool, setActiveTool] = useState('balde')
   const [darkMode, setDarkMode] = useState(() => {
     try {
       return localStorage.getItem('colorir:darkMode') === 'true'
@@ -46,6 +47,7 @@ export default function App() {
       const draft = loadDraft(selectedImage.id)
       canvas.loadImageToCanvas(selectedImage, draft)
       setZoom(1)
+      setActiveTool('balde')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [view, selectedImage])
@@ -128,6 +130,8 @@ export default function App() {
               onSave={handleSave}
               zoom={zoom}
               onZoomChange={setZoom}
+              tool={activeTool}
+              onToolChange={setActiveTool}
             />
           </div>
 
@@ -143,7 +147,8 @@ export default function App() {
                 width={canvas.imageSize.width}
                 height={canvas.imageSize.height}
                 color={selectedColor}
-                onFill={(p) => canvas.fillAt(p, selectedColor)}
+                tool={activeTool}
+                onFill={(p) => canvas.fillAt(p, activeTool === 'borracha' ? null : selectedColor)}
                 zoom={zoom}
                 onZoomChange={setZoom}
               />
