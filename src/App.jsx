@@ -5,8 +5,10 @@ import Palette from './components/Palette'
 import Toolbar from './components/Toolbar'
 import Canvas from './components/Canvas'
 import ColorPicker from './components/ColorPicker'
+import Celebration from './components/Celebration'
 import { useCanvas } from './hooks/useCanvas'
 import { useColor } from './hooks/useColor'
+import { useSound } from './hooks/useSound'
 import { loadDraft, exportImage } from './utils/imageUtils'
 import { watermarkBackground } from './utils/watermark'
 import { stickers } from './data/stickers'
@@ -21,6 +23,7 @@ export default function App() {
   const [activeTool, setActiveTool] = useState('balde')
   const [selectedSticker, setSelectedSticker] = useState(stickers[0].id)
   const [importingPhoto, setImportingPhoto] = useState(false)
+  const [celebrating, setCelebrating] = useState(false)
   const [darkMode, setDarkMode] = useState(() => {
     try {
       return localStorage.getItem('colorir:darkMode') === 'true'
@@ -31,6 +34,7 @@ export default function App() {
 
   const canvas = useCanvas()
   const { selectedColor, selectColor, selectedPattern, setSelectedPattern, history, addCustomColor } = useColor()
+  const { muted, toggleMute, playBlip, playFanfare } = useSound()
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode)
@@ -91,12 +95,23 @@ export default function App() {
 
   const handleCanvasClick = useCallback(
     (point) => {
-      if (activeTool === 'borracha') canvas.fillAt(point, null)
-      else if (activeTool === 'adesivo') canvas.stampAt(point, selectedSticker)
-      else canvas.fillAt(point, selectedColor, selectedPattern)
+      if (activeTool === 'borracha') {
+        if (canvas.fillAt(point, null)) playBlip()
+      } else if (activeTool === 'adesivo') {
+        canvas.stampAt(point, selectedSticker).then((changed) => {
+          if (changed) playBlip()
+        })
+      } else if (canvas.fillAt(point, selectedColor, selectedPattern)) {
+        playBlip()
+      }
     },
-    [activeTool, canvas, selectedColor, selectedPattern, selectedSticker]
+    [activeTool, canvas, playBlip, selectedColor, selectedPattern, selectedSticker]
   )
+
+  const handleCelebrate = useCallback(() => {
+    playFanfare()
+    setCelebrating(true)
+  }, [playFanfare])
 
   const handleSave = useCallback(() => {
     if (!selectedImage) return
@@ -141,6 +156,8 @@ export default function App() {
           imageTitle={selectedImage?.titulo}
           darkMode={darkMode}
           onToggleDarkMode={() => setDarkMode((d) => !d)}
+          muted={muted}
+          onToggleMute={toggleMute}
         />
       </div>
 
@@ -165,6 +182,7 @@ export default function App() {
               onZoomChange={setZoom}
               tool={activeTool}
               onToolChange={setActiveTool}
+              onCelebrate={handleCelebrate}
             />
           </div>
 
@@ -238,6 +256,8 @@ export default function App() {
           }}
         />
       )}
+
+      {celebrating && <Celebration onClose={() => setCelebrating(false)} />}
     </div>
   )
 }

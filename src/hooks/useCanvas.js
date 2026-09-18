@@ -77,9 +77,9 @@ export function useCanvas() {
         // ao clicar numa área ainda não colorida.
         const x = Math.floor(point.x)
         const y = Math.floor(point.y)
-        if (x < 0 || y < 0 || x >= drawCanvas.width || y >= drawCanvas.height) return
+        if (x < 0 || y < 0 || x >= drawCanvas.width || y >= drawCanvas.height) return false
         const alphaIdx = (y * drawCanvas.width + x) * 4 + 3
-        if (target.data[alphaIdx] === 0) return
+        if (target.data[alphaIdx] === 0) return false
       }
 
       const sample = getMergedImageData(baseCanvas, drawCanvas)
@@ -89,6 +89,7 @@ export function useCanvas() {
         dctx.putImageData(target, 0, 0)
         pushSnapshot()
       }
+      return changed
     },
     [pushSnapshot]
   )
@@ -109,6 +110,7 @@ export function useCanvas() {
       const size = Math.max(28, Math.min(drawCanvas.width, drawCanvas.height) * 0.12)
       dctx.drawImage(img, point.x - size / 2, point.y - size / 2, size, size)
       pushSnapshot()
+      return true
     },
     [getStickerImage, pushSnapshot]
   )
