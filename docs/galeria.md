@@ -27,3 +27,7 @@ Sereias, Princesas, Animais, Flores, Castelos, Dinossauros, Galáxia e Espaço, 
 ## Cuidado com direitos de imagem
 
 Como a galeria é pública, qualquer arquivo colocado nas pastas de imagens fica visível para qualquer visitante do site assim que o deploy roda. Só devem ser adicionadas imagens de domínio público ou com licença que permita redistribuição pública — arquivos com nome no padrão de bancos de imagens pagos (ex.: sufixos numéricos longos, "Freepik" no nome) são um sinal de alerta e não devem ser publicados sem confirmar a licença.
+
+## Gerando imagens novas com IA
+
+Para evitar depender de bancos de imagens de terceiros, `src/assets/images/PROMPT-BASE-GERACAO.md` traz um prompt-base pronto para colar em ferramentas de geração de imagem por IA — já com as regras técnicas que uma imagem de colorir precisa seguir para funcionar bem com o algoritmo de preenchimento por clique (contornos sempre fechados, áreas vizinhas nunca coladas sem uma linha entre elas, espessura de traço adequada). Esse arquivo não é uma imagem e não aparece na galeria — é só material de referência.
