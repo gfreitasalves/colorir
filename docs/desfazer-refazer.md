@@ -22,4 +22,4 @@ Registrados em `App.jsx` num único listener de `keydown` global, ativo apenas n
 - `Ctrl/Cmd + Z` → desfazer
 - `Ctrl/Cmd + Shift + Z` ou `Ctrl/Cmd + Y` → refazer
 
-Os botões "Desfazer"/"Refazer" da `Toolbar` ficam desabilitados (`canUndo`/`canRedo`) quando não há o que desfazer/refazer.
+Os botões de desfazer/refazer (ícones de seta curva) no painel lateral (`Palette.jsx`) ficam desabilitados (`canUndo`/`canRedo`) quando não há o que desfazer/refazer.

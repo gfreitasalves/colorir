@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Gallery from './components/Gallery'
 import Palette from './components/Palette'
 import Toolbar from './components/Toolbar'
+import { PaletteIcon } from './components/icons/PaletteBrushIcons'
 import Canvas from './components/Canvas'
 import ColorPicker from './components/ColorPicker'
 import Celebration from './components/Celebration'
@@ -170,20 +171,7 @@ export default function App() {
       {view === 'editor' && selectedImage && (
         <>
           <div className="shrink-0">
-            <Toolbar
-              onBack={handleBackToGallery}
-              onUndo={canvas.undo}
-              canUndo={canvas.canUndo}
-              onRedo={canvas.redo}
-              canRedo={canvas.canRedo}
-              onReset={handleReset}
-              onSave={handleSave}
-              zoom={zoom}
-              onZoomChange={setZoom}
-              tool={activeTool}
-              onToolChange={setActiveTool}
-              onCelebrate={handleCelebrate}
-            />
+            <Toolbar onBack={handleBackToGallery} onSave={handleSave} />
           </div>
 
           <div className="flex min-h-0 flex-1 overflow-hidden">
@@ -194,11 +182,20 @@ export default function App() {
                 history={history}
                 onOpenPicker={() => setPickerOpen(true)}
                 tool={activeTool}
+                onToolChange={setActiveTool}
                 stickers={stickers}
                 selectedSticker={selectedSticker}
                 onSelectSticker={setSelectedSticker}
                 selectedPattern={selectedPattern}
                 onSelectPattern={setSelectedPattern}
+                onUndo={canvas.undo}
+                canUndo={canvas.canUndo}
+                onRedo={canvas.redo}
+                canRedo={canvas.canRedo}
+                onReset={handleReset}
+                zoom={zoom}
+                onZoomChange={setZoom}
+                onCelebrate={handleCelebrate}
               />
             </div>
 
@@ -221,25 +218,35 @@ export default function App() {
             <button
               type="button"
               onClick={() => setPaletteOpen((o) => !o)}
-              className="flex flex-1 items-center justify-center text-sm font-medium text-gray-700 dark:text-gray-200"
+              className="flex flex-1 items-center justify-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-200"
             >
-              {activeTool === 'adesivo' ? '⭐ Adesivos' : '🎨 Cores'}
+              <PaletteIcon size={20} />
+              Ferramentas
             </button>
           </nav>
 
           {paletteOpen && (
-            <div className="fixed inset-x-0 bottom-12 z-40 max-h-[60vh] overflow-y-auto border-t border-gray-200 shadow-2xl md:hidden">
+            <div className="fixed inset-x-0 bottom-12 z-40 max-h-[70vh] overflow-y-auto border-t border-gray-200 shadow-2xl md:hidden">
               <Palette
                 selectedColor={selectedColor}
                 onSelectColor={handleSelectColorMobile}
                 history={history}
                 onOpenPicker={() => setPickerOpen(true)}
                 tool={activeTool}
+                onToolChange={setActiveTool}
                 stickers={stickers}
                 selectedSticker={selectedSticker}
                 onSelectSticker={handleSelectStickerMobile}
                 selectedPattern={selectedPattern}
                 onSelectPattern={setSelectedPattern}
+                onUndo={canvas.undo}
+                canUndo={canvas.canUndo}
+                onRedo={canvas.redo}
+                canRedo={canvas.canRedo}
+                onReset={handleReset}
+                zoom={zoom}
+                onZoomChange={setZoom}
+                onCelebrate={handleCelebrate}
               />
             </div>
           )}

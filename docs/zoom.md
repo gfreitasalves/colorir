@@ -1,10 +1,10 @@
 # Zoom no desenho
 
-Implementado em `Canvas.jsx`, com o estado do nível de zoom (`zoom`, de `MIN_ZOOM = 1` a `MAX_ZOOM = 3`) vivendo em `App.jsx` e sendo passado tanto para o `Canvas` quanto para a `Toolbar`.
+Implementado em `Canvas.jsx`, com o estado do nível de zoom (`zoom`, de `MIN_ZOOM = 1` a `MAX_ZOOM = 3`) vivendo em `App.jsx` e sendo passado tanto para o `Canvas` quanto para a `Palette`.
 
 ## Formas de dar zoom
 
-- **Botões da barra de ferramentas**: 100% / 150% / 200% (`ZOOM_LEVELS` em `Toolbar.jsx`), com destaque visual (`aria-pressed`) no nível ativo (comparação com tolerância de `0.05` para lidar com valores vindos de pinça/roda do mouse que não caem exatamente em um preset).
+- **Botões no painel lateral (`Palette.jsx`)**: 100% / 150% / 200% (`ZOOM_LEVELS`), com ícone de lupa (`ZoomIcon`) e destaque visual (`aria-pressed`) no nível ativo (comparação com tolerância de `0.05` para lidar com valores vindos de pinça/roda do mouse que não caem exatamente em um preset).
 - **`Ctrl` + roda do mouse**: incrementa/decrementa o zoom em passos de `0.15`, sempre limitado a `[MIN_ZOOM, MAX_ZOOM]`. O listener é registrado com `{ passive: false }` para poder chamar `preventDefault()` e evitar que a página role junto.
 - **Pinça no toque (pinch-to-zoom)**: calculada a partir da distância entre os dois dedos (`distance`) no início do gesto (`onTouchStart`) e comparada com a distância atual a cada `touchmove`, escalando o zoom proporcionalmente.
 

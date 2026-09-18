@@ -4,7 +4,7 @@ Segunda ferramenta de desenho do app, ao lado do balde: em vez de pintar uma ár
 
 ## Ferramenta ativa
 
-`App.jsx` mantém um estado `activeTool` (`'balde' | 'borracha'`), compartilhado entre `Toolbar` (onde o usuário escolhe a ferramenta, num grupo de botões 🪣/🧽) e `Canvas` (que usa a ferramenta ativa só para trocar o cursor). O estado volta para `'balde'` automaticamente sempre que uma nova imagem é carregada.
+`App.jsx` mantém um estado `activeTool` (`'balde' | 'borracha' | 'adesivo'`), compartilhado entre `Palette` (onde o usuário escolhe a ferramenta, num grupo de botões com ícones — balde, borracha, estrela) e `Canvas` (que usa a ferramenta ativa só para trocar o cursor). O estado volta para `'balde'` automaticamente sempre que uma nova imagem é carregada.
 
 ## Reaproveitando o `floodFill`
 

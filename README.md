@@ -22,7 +22,8 @@ Site publicado: https://gfreitasalves.github.io/colorir/
 - **[Restaurar imagem original e salvar/exportar](docs/salvar-exportar.md)** o desenho colorido como PNG.
 - **[Modo escuro](docs/modo-escuro.md)** com preferência salva no navegador.
 - **[Totalmente responsivo](docs/responsividade-mobile.md)**: no celular a paleta de cores abre como uma gaveta (bottom sheet) e fecha automaticamente assim que uma cor é escolhida; a altura da tela se ajusta corretamente (sem cortar a paleta atrás da barra de endereço do navegador).
-- **[Identidade visual](docs/identidade-visual.md)**: cursor personalizado em formato de pincel, marca d'água decorativa de paletas e pincéis no plano de fundo, e os mesmos ícones coloridos no cabeçalho, na barra de ferramentas e na paleta.
+- **[Identidade visual](docs/identidade-visual.md)**: cursor personalizado em formato de pincel, marca d'água decorativa de paletas e pincéis no plano de fundo, e ícones consistentes (decorativos e de ação) em todo o app.
+- **[Painel lateral](docs/painel-lateral.md)**: desfazer, refazer, limpar, ferramenta, zoom e "Terminei!" ficam junto da paleta de cores/adesivos, com ícones intuitivos em vez de emojis — a barra superior fica só com Voltar e Salvar.
 
 📄 Veja a [documentação detalhada de cada feature em `docs/`](docs/README.md).
 
@@ -41,11 +42,11 @@ src/
 ├── components/
 │   ├── Gallery.jsx            # Navegação por categorias e imagens
 │   ├── Header.jsx             # Cabeçalho com breadcrumb e alternância de tema
-│   ├── Toolbar.jsx            # Barra de ferramentas do editor (desfazer, zoom, salvar...)
+│   ├── Toolbar.jsx            # Barra superior do editor (Voltar / Salvar)
 │   ├── Canvas.jsx             # Área de desenho: zoom, pan, clique para preencher
-│   ├── Palette.jsx            # Paleta de cores e histórico
+│   ├── Palette.jsx            # Painel lateral: ações, ferramenta, zoom, paleta/adesivos
 │   ├── ColorPicker.jsx        # Seletor de cor personalizada
-│   └── icons/PaletteBrushIcons.jsx
+│   └── icons/PaletteBrushIcons.jsx, ActionIcons.jsx
 ├── hooks/
 │   ├── useCanvas.js           # Carregamento de imagem, preenchimento, desfazer/refazer
 │   ├── useColor.js            # Cor selecionada + histórico
