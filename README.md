@@ -10,6 +10,7 @@ Site publicado: https://gfreitasalves.github.io/colorir/
 
 - **[Galeria em categorias](docs/galeria.md)**: 10 categorias temáticas (Sereias, Princesas, Animais, Flores, Castelos, Dinossauros, Galáxia e Espaço, Fadas e Criaturas Mágicas, Mandalas e Padrões, Cidades e Cenários), cada uma com suas imagens.
 - **[Busca na galeria](docs/busca-galeria.md)** por título, e um botão **["Me surpreenda"](docs/me-surpreenda.md)** que abre uma imagem aleatória.
+- **[Importar foto própria](docs/importar-foto.md)**: transforma uma foto do dispositivo em um contorno para colorir, com detecção de borda 100% no navegador (a foto nunca sai do dispositivo).
 - **[Colorir por preenchimento (balde)](docs/colorir-preenchimento.md)**: clique em uma área do desenho para preenchê-la com a cor selecionada (flood fill com tolerância de cor).
 - **[Borracha](docs/borracha.md)**: apaga a coloração de uma área já pintada, sem afetar o resto do desenho.
 - **[Adesivos/carimbos](docs/adesivos.md)**: carimba estrela, coração ou brilho sobre o desenho, em tamanho fixo.

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { categories } from '../data/images'
 import { normalizeText } from '../utils/textUtils'
 
@@ -25,9 +25,10 @@ function ImageCard({ img, onSelectImage, showCategory }) {
   )
 }
 
-export default function Gallery({ onSelectImage }) {
+export default function Gallery({ onSelectImage, onImportPhoto, importing }) {
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [query, setQuery] = useState('')
+  const fileInputRef = useRef(null)
   const normalizedQuery = normalizeText(query.trim())
   const totalImages = categories.reduce((n, c) => n + c.imagens.length, 0)
 
@@ -47,6 +48,12 @@ export default function Gallery({ onSelectImage }) {
     const all = categories.flatMap((c) => c.imagens)
     if (all.length === 0) return
     onSelectImage(all[Math.floor(Math.random() * all.length)])
+  }
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0]
+    e.target.value = ''
+    if (file) onImportPhoto(file)
   }
 
   return (
@@ -87,13 +94,24 @@ export default function Gallery({ onSelectImage }) {
             className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 sm:w-56"
           />
           {!selectedCategory && !normalizedQuery && (
-            <button
-              type="button"
-              onClick={handleSurprise}
-              className="shrink-0 rounded-md border border-brand-blue px-3 py-2 text-sm font-medium text-brand-blue hover:bg-brand-blue hover:text-white"
-            >
-              🎲 Me surpreenda
-            </button>
+            <>
+              <button
+                type="button"
+                onClick={handleSurprise}
+                className="shrink-0 rounded-md border border-brand-blue px-3 py-2 text-sm font-medium text-brand-blue hover:bg-brand-blue hover:text-white"
+              >
+                🎲 Me surpreenda
+              </button>
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={importing}
+                className="shrink-0 rounded-md border border-brand-blue px-3 py-2 text-sm font-medium text-brand-blue hover:bg-brand-blue hover:text-white disabled:cursor-wait disabled:opacity-60"
+              >
+                {importing ? '⏳ Processando...' : '📷 Minha foto'}
+              </button>
+              <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
+            </>
           )}
         </div>
       </div>
