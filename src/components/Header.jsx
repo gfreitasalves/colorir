@@ -1,6 +1,6 @@
 import { PaletteIcon, BrushIcon } from './icons/PaletteBrushIcons'
 
-export default function Header({ view, categoryTitle, imageTitle, darkMode, onToggleDarkMode }) {
+export default function Header({ view, categoryTitle, imageTitle, darkMode, onToggleDarkMode, muted, onToggleMute }) {
   const crumbs = ['Galeria']
   if (view === 'editor') {
     if (categoryTitle) crumbs.push(categoryTitle)
@@ -18,15 +18,26 @@ export default function Header({ view, categoryTitle, imageTitle, darkMode, onTo
         </div>
         <BrushIcon size={22} className="ml-1 hidden sm:block" />
       </div>
-      <button
-        type="button"
-        onClick={onToggleDarkMode}
-        aria-label="Alternar modo escuro"
-        title="Alternar modo escuro"
-        className="rounded-md border border-gray-300 px-3 py-2 text-sm dark:border-gray-600 dark:text-gray-100"
-      >
-        {darkMode ? '☀️ Claro' : '🌙 Escuro'}
-      </button>
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={onToggleMute}
+          aria-label={muted ? 'Ativar sons' : 'Silenciar sons'}
+          title={muted ? 'Ativar sons' : 'Silenciar sons'}
+          className="rounded-md border border-gray-300 px-3 py-2 text-sm dark:border-gray-600 dark:text-gray-100"
+        >
+          {muted ? '🔇' : '🔊'}
+        </button>
+        <button
+          type="button"
+          onClick={onToggleDarkMode}
+          aria-label="Alternar modo escuro"
+          title="Alternar modo escuro"
+          className="rounded-md border border-gray-300 px-3 py-2 text-sm dark:border-gray-600 dark:text-gray-100"
+        >
+          {darkMode ? '☀️ Claro' : '🌙 Escuro'}
+        </button>
+      </div>
     </header>
   )
 }

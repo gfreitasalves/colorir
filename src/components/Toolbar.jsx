@@ -23,7 +23,20 @@ const TOOLS = [
   { id: 'adesivo', label: 'Adesivos', emoji: '⭐' },
 ]
 
-export default function Toolbar({ onBack, onUndo, canUndo, onRedo, canRedo, onReset, onSave, zoom, onZoomChange, tool, onToolChange }) {
+export default function Toolbar({
+  onBack,
+  onUndo,
+  canUndo,
+  onRedo,
+  canRedo,
+  onReset,
+  onSave,
+  zoom,
+  onZoomChange,
+  tool,
+  onToolChange,
+  onCelebrate,
+}) {
   return (
     <div className="flex flex-wrap items-center gap-2 border-b border-gray-200 bg-white px-4 py-2 dark:border-gray-700 dark:bg-gray-800">
       <PaletteIcon size={26} className="hidden sm:block" />
@@ -90,6 +103,13 @@ export default function Toolbar({ onBack, onUndo, canUndo, onRedo, canRedo, onRe
 
       <div className="ml-auto flex items-center gap-2">
         <BrushIcon size={24} className="hidden sm:block" />
+        <button
+          type="button"
+          onClick={onCelebrate}
+          className="rounded-md border border-brand-blue px-3 py-2 text-sm font-medium text-brand-blue transition-colors hover:bg-brand-blue hover:text-white"
+        >
+          🎉 Terminei!
+        </button>
         <button
           type="button"
           onClick={onSave}
