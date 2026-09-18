@@ -28,19 +28,25 @@ function matches(data, idx, target, tolerance) {
  * Scanline flood fill. `sampleData` is used to decide region membership
  * (the merged, visible pixels); `targetData` is what actually gets painted.
  * They may be the same buffer.
+ *
+ * `fillColor` is either a fixed [r,g,b,a] (solid fill/erase) or a function
+ * `(x, y) => [r,g,b,a]` evaluated per pixel (patterns like bolinhas/listras).
  */
-export function floodFill(sampleData, targetData, width, height, startX, startY, fillColorRgba, tolerance = 32) {
+export function floodFill(sampleData, targetData, width, height, startX, startY, fillColor, tolerance = 32) {
   const x0 = Math.floor(startX)
   const y0 = Math.floor(startY)
   if (x0 < 0 || y0 < 0 || x0 >= width || y0 >= height) return false
 
+  const getFillColor = typeof fillColor === 'function' ? fillColor : () => fillColor
+
   const startIdx = (y0 * width + x0) * 4
   const target = colorAt(sampleData, startIdx)
+  const startFill = getFillColor(x0, y0)
   if (
-    target[0] === fillColorRgba[0] &&
-    target[1] === fillColorRgba[1] &&
-    target[2] === fillColorRgba[2] &&
-    target[3] === fillColorRgba[3]
+    target[0] === startFill[0] &&
+    target[1] === startFill[1] &&
+    target[2] === startFill[2] &&
+    target[3] === startFill[3]
   ) {
     return false
   }
@@ -67,10 +73,11 @@ export function floodFill(sampleData, targetData, width, height, startX, startY,
       if (visited[pIdx]) continue
       visited[pIdx] = 1
       const dataIdx = pIdx * 4
-      targetData[dataIdx] = fillColorRgba[0]
-      targetData[dataIdx + 1] = fillColorRgba[1]
-      targetData[dataIdx + 2] = fillColorRgba[2]
-      targetData[dataIdx + 3] = fillColorRgba[3]
+      const [r, g, b, a] = getFillColor(i, y)
+      targetData[dataIdx] = r
+      targetData[dataIdx + 1] = g
+      targetData[dataIdx + 2] = b
+      targetData[dataIdx + 3] = a
       changed = true
 
       if (y > 0) {

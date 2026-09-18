@@ -8,6 +8,7 @@ Cada arquivo abaixo descreve uma funcionalidade do ColorirApp em detalhe: como f
 - [Colorir por preenchimento (balde)](./colorir-preenchimento.md)
 - [Borracha](./borracha.md)
 - [Adesivos/carimbos](./adesivos.md)
+- [Preenchimento com padrão (bolinhas/listras)](./preenchimento-com-padrao.md)
 - [Paleta de cores](./paleta-de-cores.md)
 - [Zoom no desenho](./zoom.md)
 - [Desfazer / Refazer](./desfazer-refazer.md)
