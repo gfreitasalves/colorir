@@ -31,7 +31,8 @@ COMPOSITION:
 - Single subject, centered, filling most of the frame, with a clear margin from the edges (nothing cropped or touching the border).
 - Plain white background — no scenery clutter or small background shapes that create extra tiny fillable regions, unless the scene itself is the subject (in that case keep background elements large and simple).
 - Moderate level of detail: recognizable and fun, but not so intricate that it creates dozens of tiny compartments — appropriate for young children to color.
-- Square or portrait orientation, high resolution (at least 1200px on the longest side).
+- Square (1:1) orientation preferred — the gallery displays thumbnails in a square crop, so a square image fills the card with no wasted whitespace. Portrait (3:4) is fine for tall subjects (a full-body character, for example); the app centers it either way without cropping.
+- High resolution: 1500–2000px on the longest side. The app caps every image at 1400px internally, so anything in this range gives it a sharp source to downscale from — generating at exactly the app's cap (or below) risks blurry, anti-aliased lines once the user zooms in, which is exactly what can make color leak across a thin outline.
 
 SUBJECT:
 ```
