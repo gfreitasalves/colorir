@@ -3,6 +3,8 @@
 Cada arquivo abaixo descreve uma funcionalidade do ColorirApp em detalhe: como funciona, quais arquivos implementam e decisões técnicas relevantes. Para uma visão geral do projeto (stack, estrutura de pastas, como rodar localmente), veja o [README principal](../README.md).
 
 - [Galeria de imagens](./galeria.md)
+- [Busca/filtro na galeria](./busca-galeria.md)
+- [Botão "Me surpreenda"](./me-surpreenda.md)
 - [Colorir por preenchimento (balde)](./colorir-preenchimento.md)
 - [Borracha](./borracha.md)
 - [Paleta de cores](./paleta-de-cores.md)
