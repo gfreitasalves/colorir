@@ -66,9 +66,21 @@ export function useCanvas() {
       const drawCanvas = drawCanvasRef.current
       const baseCanvas = baseCanvasRef.current
       const dctx = drawCanvas.getContext('2d')
-      const sample = getMergedImageData(baseCanvas, drawCanvas)
       const target = dctx.getImageData(0, 0, drawCanvas.width, drawCanvas.height)
-      const fillRgba = hexToRgba(colorHex)
+
+      if (!colorHex) {
+        // Borracha: só há o que apagar onde já existe tinta (alpha > 0) na
+        // camada de desenho — evita empilhar um snapshot sem efeito visual
+        // ao clicar numa área ainda não colorida.
+        const x = Math.floor(point.x)
+        const y = Math.floor(point.y)
+        if (x < 0 || y < 0 || x >= drawCanvas.width || y >= drawCanvas.height) return
+        const alphaIdx = (y * drawCanvas.width + x) * 4 + 3
+        if (target.data[alphaIdx] === 0) return
+      }
+
+      const sample = getMergedImageData(baseCanvas, drawCanvas)
+      const fillRgba = colorHex ? hexToRgba(colorHex) : [0, 0, 0, 0]
       const changed = floodFill(sample.data, target.data, drawCanvas.width, drawCanvas.height, point.x, point.y, fillRgba, 40)
       if (changed) {
         dctx.putImageData(target, 0, 0)

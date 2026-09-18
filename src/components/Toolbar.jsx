@@ -17,7 +17,12 @@ function ToolButton({ onClick, disabled, label, children }) {
 
 const ZOOM_LEVELS = [1, 1.5, 2]
 
-export default function Toolbar({ onBack, onUndo, canUndo, onRedo, canRedo, onReset, onSave, zoom, onZoomChange }) {
+const TOOLS = [
+  { id: 'balde', label: 'Balde de tinta', emoji: '🪣' },
+  { id: 'borracha', label: 'Borracha', emoji: '🧽' },
+]
+
+export default function Toolbar({ onBack, onUndo, canUndo, onRedo, canRedo, onReset, onSave, zoom, onZoomChange, tool, onToolChange }) {
   return (
     <div className="flex flex-wrap items-center gap-2 border-b border-gray-200 bg-white px-4 py-2 dark:border-gray-700 dark:bg-gray-800">
       <PaletteIcon size={26} className="hidden sm:block" />
@@ -39,6 +44,28 @@ export default function Toolbar({ onBack, onUndo, canUndo, onRedo, canRedo, onRe
       <ToolButton onClick={onReset} label="Limpar / Restaurar imagem original">
         🗑 Limpar
       </ToolButton>
+
+      <div className="mx-1 h-6 w-px bg-gray-200 dark:bg-gray-600" />
+
+      <div className="flex items-center gap-1" role="group" aria-label="Ferramenta">
+        {TOOLS.map((t) => (
+          <button
+            key={t.id}
+            type="button"
+            onClick={() => onToolChange(t.id)}
+            aria-pressed={tool === t.id}
+            aria-label={t.label}
+            title={t.label}
+            className={`rounded-md border px-2.5 py-1.5 text-sm ${
+              tool === t.id
+                ? 'border-brand-blue bg-brand-blue text-white'
+                : 'border-gray-300 text-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:text-gray-100 dark:hover:bg-gray-700'
+            }`}
+          >
+            {t.emoji}
+          </button>
+        ))}
+      </div>
 
       <div className="mx-1 h-6 w-px bg-gray-200 dark:bg-gray-600" />
 
