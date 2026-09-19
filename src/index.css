@@ -21,6 +21,103 @@ body {
   color: #f3f4f6;
 }
 
+/*
+ * Temas de cor da interface (Header, Toolbar, Palette, botões — nunca a paleta de pintura).
+ * Cada tema define as mesmas variáveis de "chrome" para a variante clara (`:root`) e escura
+ * (`.dark`), combinadas com `[data-theme="..."]` aplicado em <html> pelo hook
+ * `useInterfaceTheme`. O tema "padrao" reproduz exatamente os tons cinza já usados antes desta
+ * feature existir.
+ */
+:root,
+:root[data-theme='padrao'] {
+  --chrome-bg: #ffffff;
+  --chrome-border: #e5e7eb;
+  --chrome-border-strong: #d1d5db;
+  --chrome-text: #374151;
+  --chrome-text-muted: #4b5563;
+  --chrome-muted-bg: #f3f4f6;
+  --chrome-accent: #2563eb;
+  --chrome-accent-text: #ffffff;
+}
+
+.dark,
+.dark[data-theme='padrao'] {
+  --chrome-bg: #1f2937;
+  --chrome-border: #374151;
+  --chrome-border-strong: #4b5563;
+  --chrome-text: #f3f4f6;
+  --chrome-text-muted: #d1d5db;
+  --chrome-muted-bg: #374151;
+  --chrome-accent: #2563eb;
+  --chrome-accent-text: #ffffff;
+}
+
+:root[data-theme='oceano'] {
+  --chrome-bg: #eff6ff;
+  --chrome-border: #bfdbfe;
+  --chrome-border-strong: #93c5fd;
+  --chrome-text: #1e3a8a;
+  --chrome-text-muted: #1d4ed8;
+  --chrome-muted-bg: #dbeafe;
+  --chrome-accent: #0284c7;
+  --chrome-accent-text: #ffffff;
+}
+
+.dark[data-theme='oceano'] {
+  --chrome-bg: #0c4a6e;
+  --chrome-border: #075985;
+  --chrome-border-strong: #0369a1;
+  --chrome-text: #e0f2fe;
+  --chrome-text-muted: #bae6fd;
+  --chrome-muted-bg: #075985;
+  --chrome-accent: #0284c7;
+  --chrome-accent-text: #ffffff;
+}
+
+:root[data-theme='flor'] {
+  --chrome-bg: #fdf4ff;
+  --chrome-border: #f5d0fe;
+  --chrome-border-strong: #f0abfc;
+  --chrome-text: #701a75;
+  --chrome-text-muted: #a21caf;
+  --chrome-muted-bg: #fae8ff;
+  --chrome-accent: #c026d3;
+  --chrome-accent-text: #ffffff;
+}
+
+.dark[data-theme='flor'] {
+  --chrome-bg: #4a044e;
+  --chrome-border: #701a75;
+  --chrome-border-strong: #86198f;
+  --chrome-text: #fae8ff;
+  --chrome-text-muted: #f0abfc;
+  --chrome-muted-bg: #701a75;
+  --chrome-accent: #c026d3;
+  --chrome-accent-text: #ffffff;
+}
+
+:root[data-theme='floresta'] {
+  --chrome-bg: #f0fdf4;
+  --chrome-border: #bbf7d0;
+  --chrome-border-strong: #86efac;
+  --chrome-text: #14532d;
+  --chrome-text-muted: #15803d;
+  --chrome-muted-bg: #dcfce7;
+  --chrome-accent: #16a34a;
+  --chrome-accent-text: #ffffff;
+}
+
+.dark[data-theme='floresta'] {
+  --chrome-bg: #052e16;
+  --chrome-border: #14532d;
+  --chrome-border-strong: #166534;
+  --chrome-text: #dcfce7;
+  --chrome-text-muted: #bbf7d0;
+  --chrome-muted-bg: #14532d;
+  --chrome-accent: #16a34a;
+  --chrome-accent-text: #ffffff;
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
