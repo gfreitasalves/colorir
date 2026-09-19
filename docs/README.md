@@ -12,6 +12,7 @@ Cada arquivo abaixo descreve uma funcionalidade do ColorirApp em detalhe: como f
 - [Preenchimento com padrão (bolinhas/listras)](./preenchimento-com-padrao.md)
 - [Efeitos sonoros](./efeitos-sonoros.md)
 - [Animação de "parabéns"](./celebracao.md)
+- [Painel lateral (ações + ferramenta + zoom + paleta)](./painel-lateral.md)
 - [Paleta de cores](./paleta-de-cores.md)
 - [Zoom no desenho](./zoom.md)
 - [Desfazer / Refazer](./desfazer-refazer.md)

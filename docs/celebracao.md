@@ -1,6 +1,6 @@
 # Animação de "parabéns"
 
-Botão "🎉 Terminei!" na barra de ferramentas do editor: comemora a conclusão do desenho com som e uma animação de confete.
+Botão "Terminei!" (com um ícone de check) no painel lateral do editor: comemora a conclusão do desenho com som e uma animação de confete.
 
 ## Gatilho manual, não detecção automática
 

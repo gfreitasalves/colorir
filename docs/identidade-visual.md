@@ -8,8 +8,12 @@ Enquanto o mouse está sobre a área de desenho, o cursor padrão é substituíd
 
 `src/components/icons/PaletteBrushIcons.jsx` exporta dois componentes React (`PaletteIcon`, `BrushIcon`), desenhados em SVG inline, reaproveitados coloridos e em opacidade total em três lugares:
 - no `Header` (ao lado do nome "ColorirApp");
-- na `Toolbar` do editor;
+- na `Toolbar` do editor (barra superior, agora reduzida a Voltar/Salvar);
 - na `Palette` (acima da lista de cores).
+
+## Ícones de ação (ações, ferramenta, zoom, salvar...)
+
+`src/components/icons/ActionIcons.jsx` exporta um conjunto de ícones de linha simples (traço único, `stroke="currentColor"`, sem preenchimento) para todas as ações do editor — desfazer, refazer, limpar, balde, borracha, adesivo, zoom, "Terminei!", salvar, voltar. Ao contrário dos ícones decorativos de paleta/pincel (coloridos, estilo desenhado à mão), esses são monocromáticos e herdam a cor do texto do botão (`currentColor`), o que os deixa consistentes em qualquer estado (normal, ativo, desabilitado) e em ambos os temas (claro/escuro) sem precisar de variantes de cor separadas.
 
 ## Marca d'água do plano de fundo
 
