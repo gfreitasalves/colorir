@@ -31,12 +31,12 @@ Projeto único (SPA React + Vite): `src/`, `docs/` na raiz do repositório — c
 
 **Purpose**: Criar a base de dados do tema e as variáveis CSS que todas as user stories vão consumir
 
-- [ ] T001 [P] Criar `src/data/interfaceThemes.js` exportando um array de objetos
+- [X] T001 [P] Criar `src/data/interfaceThemes.js` exportando um array de objetos
   `{ id, nome, corDestaque }` para os 4 temas definidos em `data-model.md`: `padrao` ("Padrão"),
   `oceano` ("Oceano"), `flor` ("Flor"), `floresta` ("Floresta"). Restrição do data-model a respeitar
   literalmente: "`id` deve ser um dos 4 valores conhecidos" e "o tema `padrao` ... sempre deve
   existir como primeira opção da lista".
-- [ ] T002 [P] Em `src/index.css`, adicionar os blocos de variáveis CSS de chrome para cada tema,
+- [X] T002 [P] Em `src/index.css`, adicionar os blocos de variáveis CSS de chrome para cada tema,
   seguindo a Decisão 1 de `research.md`: um bloco `:root { --chrome-bg: ...; --chrome-border: ...;
   --chrome-text: ...; --chrome-accent: ...; --chrome-button-bg: ...; }` e `.dark { ... }` com os
   valores atuais (equivalentes aos hardcoded `bg-white`/`border-gray-200`/`text-gray-800` em modo
@@ -57,13 +57,13 @@ Projeto único (SPA React + Vite): `src/`, `docs/` na raiz do repositório — c
 
 **⚠️ CRITICAL**: Nenhuma user story pode começar antes desta fase estar completa
 
-- [ ] T003 Criar `src/hooks/useInterfaceTheme.js`: hook que mantém o estado `theme` (inicializado
+- [X] T003 Criar `src/hooks/useInterfaceTheme.js`: hook que mantém o estado `theme` (inicializado
   como `'padrao'`), expõe `theme` e `setTheme`, e usa um `useEffect` para aplicar
   `document.documentElement.setAttribute('data-theme', theme)` a cada mudança — espelhando a
   estrutura do `useEffect` de `darkMode` já existente em `App.jsx`. Ainda sem persistência em
   `localStorage` (isso é FR-005, tratado em T011/US2). Depende de T001 (usa os `id`s de
   `interfaceThemes.js` como valores válidos).
-- [ ] T004 Em `src/App.jsx`, chamar `useInterfaceTheme()` ao lado do estado `darkMode` já existente,
+- [X] T004 Em `src/App.jsx`, chamar `useInterfaceTheme()` ao lado do estado `darkMode` já existente,
   e repassar `theme`/`setTheme` como props para `Header` (mesmo padrão de props já usado para
   `darkMode`/`onToggleDarkMode`). Depende de T003.
 
@@ -82,28 +82,28 @@ confirmar visualmente que o chrome muda e a paleta de pintura (as 40 cores) não
 
 ### Implementation for User Story 1
 
-- [ ] T005 [P] [US1] Criar `src/components/ThemePicker.jsx`: componente que recebe a lista de temas
+- [X] T005 [P] [US1] Criar `src/components/ThemePicker.jsx`: componente que recebe a lista de temas
   (de `src/data/interfaceThemes.js`) e uma função `onSelectTheme(id)`, renderizando um botão/swatch
   por tema (sem indicação de tema ativo ainda — isso é US3). Depende de T001.
-- [ ] T006 [US1] Em `src/components/Header.jsx`, importar e renderizar `<ThemePicker />` ao lado do
+- [X] T006 [US1] Em `src/components/Header.jsx`, importar e renderizar `<ThemePicker />` ao lado do
   botão de alternar claro/escuro já existente, ligado a `theme`/`setTheme` recebidos via props
   (FR-003 da spec: "próximo ao botão existente de alternância entre claro e escuro"). Depende de
   T004, T005.
-- [ ] T007 [P] [US1] Em `src/components/Toolbar.jsx`, substituir as classes Tailwind hardcoded
+- [X] T007 [P] [US1] Em `src/components/Toolbar.jsx`, substituir as classes Tailwind hardcoded
   (`bg-white`, `border-gray-200`, `dark:border-gray-700`, `dark:bg-gray-800`, `border-gray-300`,
   `text-gray-700`, `hover:bg-gray-100`, `dark:border-gray-600`, `dark:text-gray-100`,
   `dark:hover:bg-gray-700`) pelos utilitários de valor arbitrário que leem as variáveis de chrome
   criadas em T002 (`bg-[var(--chrome-bg)]`, `border-[var(--chrome-border)]`,
   `text-[var(--chrome-text)]` etc.), preservando o visual atual quando `theme === 'padrao'`.
   Depende de T002.
-- [ ] T008 [P] [US1] Aplicar a mesma substituição de T007 em `src/components/Palette.jsx` (21
+- [X] T008 [P] [US1] Aplicar a mesma substituição de T007 em `src/components/Palette.jsx` (21
   ocorrências de `dark:` hoje) — painel lateral e todos os seus botões de ação passam a usar as
   variáveis de chrome em vez de classes de cor fixas. Depende de T002.
-- [ ] T009 [US1] Em `src/components/Header.jsx`, aplicar a mesma substituição de T007/T008 no
+- [X] T009 [US1] Em `src/components/Header.jsx`, aplicar a mesma substituição de T007/T008 no
   próprio cabeçalho e nos botões de mudo/claro-escuro (hoje `border-gray-300`, `dark:border-gray-600`,
   `dark:text-gray-100`, `bg-white`, `dark:bg-gray-800`), para que o cabeçalho também reflita o tema
   selecionado. Depende de T002, T006 (edita o mesmo arquivo).
-- [ ] T010 [US1] Validar manualmente o Cenário 1 e o Cenário 3 (independência do claro/escuro) de
+- [X] T010 [US1] Validar manualmente o Cenário 1 e o Cenário 3 (independência do claro/escuro) de
   `quickstart.md`: alternar entre os 5 temas e entre claro/escuro, confirmando que o chrome muda
   como esperado (FR-001, FR-004, FR-006) e que as cores da paleta de pintura em
   `src/data/presetColors.js` permanecem exatamente as mesmas em todos os casos (FR-002). Depende de
@@ -124,7 +124,7 @@ navegador e confirmar que o tema persiste; limpar o `localStorage` e confirmar v
 
 ### Implementation for User Story 2
 
-- [ ] T011 [US2] Estender `src/hooks/useInterfaceTheme.js` (criado em T003) para: (a) inicializar o
+- [X] T011 [US2] Estender `src/hooks/useInterfaceTheme.js` (criado em T003) para: (a) inicializar o
   estado `theme` lendo `localStorage.getItem('colorir:theme')`; (b) validar o valor lido contra os
   `id`s conhecidos de `src/data/interfaceThemes.js`, usando `'padrao'` como fallback quando o valor
   estiver ausente, corrompido ou não reconhecido — regra de `data-model.md`: "qualquer outro valor
@@ -146,10 +146,10 @@ editor) e confirmar que o tema ativo aparece destacado.
 
 ### Implementation for User Story 3
 
-- [ ] T012 [US3] Em `src/components/ThemePicker.jsx`, adicionar a prop `theme` (tema atualmente
+- [X] T012 [US3] Em `src/components/ThemePicker.jsx`, adicionar a prop `theme` (tema atualmente
   ativo) e destacar visualmente (ex.: borda/anel ou marca de seleção) o botão correspondente ao
   tema ativo (FR-008). Depende de T005, T006.
-- [ ] T013 [US3] Em `src/components/ThemePicker.jsx`, adicionar `aria-label`/`title` descritivos em
+- [X] T013 [US3] Em `src/components/ThemePicker.jsx`, adicionar `aria-label`/`title` descritivos em
   cada botão de tema (ex.: `"Tema Oceano"`), seguindo o mesmo padrão já usado nos botões de
   claro/escuro e mudo em `Header.jsx` (`aria-label`/`title`). Depende de T005.
 
@@ -161,17 +161,17 @@ editor) e confirmar que o tema ativo aparece destacado.
 
 **Purpose**: Documentação (Princípio IV) e validação final (Princípio V)
 
-- [ ] T014 [P] Criar `docs/temas-de-interface.md` documentando a feature (como funciona, arquivos
+- [X] T014 [P] Criar `docs/temas-de-interface.md` documentando a feature (como funciona, arquivos
   envolvidos, decisão técnica de variáveis CSS + `data-theme`), seguindo o padrão dos arquivos já
   existentes em `docs/` (ex. `docs/modo-escuro.md`).
-- [ ] T015 [P] Adicionar link para `docs/temas-de-interface.md` em `docs/README.md` e um item na
+- [X] T015 [P] Adicionar link para `docs/temas-de-interface.md` em `docs/README.md` e um item na
   lista de funcionalidades de `README.md` (seção `#funcionalidades`), conforme Princípio IV da
   constituição.
-- [ ] T016 Rodar `npm run build` e corrigir qualquer erro antes de prosseguir.
-- [ ] T017 Rodar `npm run preview` e validar manualmente TODOS os cenários de `quickstart.md` em
+- [X] T016 Rodar `npm run build` e corrigir qualquer erro antes de prosseguir.
+- [X] T017 Rodar `npm run preview` e validar manualmente TODOS os cenários de `quickstart.md` em
   viewport desktop e mobile (Princípio V — inclui a seção "Validação mobile" do quickstart, com o
   seletor de tema e a gaveta de paleta no celular).
-- [ ] T018 Commit na branch de trabalho e push, seguindo o fluxo de Git/PR do projeto
+- [X] T018 Commit na branch de trabalho e push, seguindo o fluxo de Git/PR do projeto
   (`docs/deploy.md`).
 
 ---

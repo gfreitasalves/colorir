@@ -10,6 +10,7 @@ import Celebration from './components/Celebration'
 import { useCanvas } from './hooks/useCanvas'
 import { useColor } from './hooks/useColor'
 import { useSound } from './hooks/useSound'
+import { useInterfaceTheme } from './hooks/useInterfaceTheme'
 import { loadDraft, exportImage } from './utils/imageUtils'
 import { watermarkBackground } from './utils/watermark'
 import { stickers } from './data/stickers'
@@ -36,6 +37,7 @@ export default function App() {
   const canvas = useCanvas()
   const { selectedColor, selectColor, selectedPattern, setSelectedPattern, history, addCustomColor } = useColor()
   const { muted, toggleMute, playBlip, playFanfare } = useSound()
+  const { theme, setTheme } = useInterfaceTheme()
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode)
@@ -159,6 +161,8 @@ export default function App() {
           onToggleDarkMode={() => setDarkMode((d) => !d)}
           muted={muted}
           onToggleMute={toggleMute}
+          theme={theme}
+          onSelectTheme={setTheme}
         />
       </div>
 
@@ -214,11 +218,11 @@ export default function App() {
             </div>
           </div>
 
-          <nav className="flex h-12 shrink-0 border-t border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800 md:hidden">
+          <nav className="flex h-12 shrink-0 border-t border-[var(--chrome-border)] bg-[var(--chrome-bg)] md:hidden">
             <button
               type="button"
               onClick={() => setPaletteOpen((o) => !o)}
-              className="flex flex-1 items-center justify-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-200"
+              className="flex flex-1 items-center justify-center gap-2 text-sm font-medium text-[var(--chrome-text)]"
             >
               <PaletteIcon size={20} />
               Ferramentas
