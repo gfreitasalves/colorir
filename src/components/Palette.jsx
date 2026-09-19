@@ -107,10 +107,10 @@ export default function Palette({
           </div>
         </div>
       ) : (
-        <div className="studio-wood-surface studio-palette-frame relative p-4 pb-6">
-          <PaletteThumbHole className="pointer-events-none absolute -right-1 top-2 opacity-70" size={30} />
+        <div className="studio-palette-frame relative border border-[var(--chrome-border-strong)] bg-[var(--chrome-muted-bg)] p-4 pb-6 shadow-md">
+          <PaletteThumbHole className="pointer-events-none absolute -right-1 top-2 opacity-40" size={30} />
 
-          <h2 className="mb-2 flex items-center gap-2 text-sm font-semibold text-[var(--studio-wood-text)]">
+          <h2 className="mb-2 flex items-center gap-2 text-sm font-semibold text-[var(--chrome-text)]">
             <PaletteIcon size={24} />
             Paleta de Cores
             <BrushIcon size={18} />
@@ -126,7 +126,7 @@ export default function Palette({
           </div>
 
           <div className="mt-3">
-            <span className="mb-1 block text-xs font-medium text-[var(--studio-wood-text)] opacity-80">Preenchimento</span>
+            <span className="mb-1 block text-xs font-medium text-[var(--chrome-text-muted)]">Preenchimento</span>
             <div className="flex gap-1" role="group" aria-label="Padrão de preenchimento">
               {PATTERNS.map((p) => (
                 <button
@@ -137,7 +137,7 @@ export default function Palette({
                   className={`rounded-md border px-2 py-1 text-xs font-medium ${
                     selectedPattern === p.id
                       ? 'border-[var(--chrome-accent)] bg-[var(--chrome-accent)] text-[var(--chrome-accent-text)]'
-                      : 'border-black/20 bg-white/70 text-[var(--studio-wood-text)] hover:bg-white/90 dark:border-white/20 dark:bg-black/25 dark:hover:bg-black/40'
+                      : 'border-[var(--chrome-border-strong)] bg-[var(--chrome-bg)] text-[var(--chrome-text)] hover:opacity-90'
                   }`}
                 >
                   {p.label}
@@ -149,20 +149,20 @@ export default function Palette({
           <button
             type="button"
             onClick={onOpenPicker}
-            className="mt-3 rounded-md border border-[var(--chrome-accent)] bg-white/80 px-3 py-2 text-sm font-medium text-[var(--chrome-accent)] transition-colors hover:bg-[var(--chrome-accent)] hover:text-[var(--chrome-accent-text)] dark:bg-black/25"
+            className="mt-3 rounded-md border border-[var(--chrome-accent)] bg-[var(--chrome-bg)] px-3 py-2 text-sm font-medium text-[var(--chrome-accent)] transition-colors hover:bg-[var(--chrome-accent)] hover:text-[var(--chrome-accent-text)]"
           >
             + Cor Personalizada
           </button>
 
-          <div className="mt-3 flex items-center gap-2 rounded-md bg-white/70 p-2 dark:bg-black/25">
-            <span className="text-xs text-[var(--studio-wood-text)] opacity-80">Atual</span>
+          <div className="mt-3 flex items-center gap-2 rounded-md bg-[var(--chrome-bg)] p-2">
+            <span className="text-xs text-[var(--chrome-text-muted)]">Atual</span>
             <div className="studio-paint-blob h-8 w-8 border border-black/10" style={{ backgroundColor: selectedColor }} />
-            <span className="text-xs font-mono text-[var(--studio-wood-text)]">{selectedColor}</span>
+            <span className="text-xs font-mono text-[var(--chrome-text)]">{selectedColor}</span>
           </div>
 
           {history.length > 0 && (
             <div className="mt-3">
-              <h2 className="mb-2 text-sm font-semibold text-[var(--studio-wood-text)]">Histórico</h2>
+              <h2 className="mb-2 text-sm font-semibold text-[var(--chrome-text)]">Histórico</h2>
               <div className="flex flex-wrap gap-2">
                 {history.map((hex, i) => (
                   <Swatch key={`${hex}-${i}`} hex={hex} selected={colorsEqual(hex, selectedColor)} onClick={() => onSelectColor(hex)} />

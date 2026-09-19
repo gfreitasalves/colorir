@@ -19,7 +19,7 @@ Cada arquivo abaixo descreve uma funcionalidade do ColorirApp em detalhe: como f
 - [Salvar e exportar](./salvar-exportar.md)
 - [Modo escuro](./modo-escuro.md)
 - [Temas de cor da interface](./temas-de-interface.md)
-- [Estilo de ateliê (cavalete + paleta de artista)](./estudio-cavalete-paleta.md)
+- [Paleta de artista (formato da seleção de cor)](./paleta-de-artista.md)
 - [Responsividade e mobile](./responsividade-mobile.md)
 - [Identidade visual](./identidade-visual.md)
 - [Deploy e publicação](./deploy.md)

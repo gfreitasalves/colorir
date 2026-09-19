@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { getEventPoint } from '../utils/drawingUtils'
-import { EaselLegs, EaselLedge } from './icons/StudioDecorIcons'
 
 const MIN_ZOOM = 1
 const MAX_ZOOM = 3
@@ -122,32 +121,21 @@ export default function Canvas({ baseCanvasRef, drawCanvasRef, width, height, co
   )
 
   return (
-    <div className="flex h-full w-full flex-col overflow-hidden">
-      {/* Moldura de cavalete: puramente decorativa, ao redor do container de scroll/zoom original
-          (que continua abaixo com as mesmas classes/comportamento de sempre). */}
-      <div className="studio-wood-surface studio-frame relative min-h-0 flex-1 p-2 sm:p-3 md:p-4">
+    <div
+      ref={scrollRef}
+      className="h-full w-full overflow-auto bg-gray-200 p-4 dark:bg-gray-900"
+      style={{ touchAction: 'pan-x pan-y' }}
+    >
+      <div ref={measureRef} className="flex min-h-full min-w-full items-center justify-center">
         <div
-          ref={scrollRef}
-          className="h-full w-full overflow-auto bg-gray-200 p-4 dark:bg-gray-900"
-          style={{ touchAction: 'pan-x pan-y' }}
+          className="relative shrink-0 touch-none select-none shadow-lg"
+          style={{ width: size.w, height: size.h, cursor }}
+          onClick={handleClick}
         >
-          <div ref={measureRef} className="flex min-h-full min-w-full items-center justify-center">
-            <div
-              className="relative shrink-0 touch-none select-none shadow-lg"
-              style={{ width: size.w, height: size.h, cursor }}
-              onClick={handleClick}
-            >
-              <canvas ref={baseCanvasRef} className="absolute left-0 top-0 h-full w-full bg-white" />
-              <canvas ref={drawCanvasRef} className="absolute left-0 top-0 h-full w-full" />
-            </div>
-          </div>
+          <canvas ref={baseCanvasRef} className="absolute left-0 top-0 h-full w-full bg-white" />
+          <canvas ref={drawCanvasRef} className="absolute left-0 top-0 h-full w-full" />
         </div>
       </div>
-
-      <div className="hidden h-4 shrink-0 text-[var(--studio-wood-dark)] sm:block" aria-hidden="true">
-        <EaselLedge />
-      </div>
-      <EaselLegs className="pointer-events-none mx-auto hidden shrink-0 text-[var(--studio-wood-dark)] md:block" aria-hidden="true" />
     </div>
   )
 }
