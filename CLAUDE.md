@@ -6,6 +6,8 @@ Este arquivo é lido automaticamente por sessões Claude (Claude Code, Cowork et
 
 ColorirApp: app web de livro de colorir infantil (React + Vite + Tailwind), publicado via GitHub Pages a partir da branch `main`. Veja [README.md](./README.md) para a visão geral e [docs/](./docs/README.md) para a documentação detalhada de cada feature existente.
 
+Este projeto também tem o [GitHub Spec Kit](https://github.com/github/spec-kit) instalado (`.specify/`, skills `/speckit-*` em `.claude/skills/`), com a constituição em [`.specify/memory/constitution.md`](./.specify/memory/constitution.md) resumindo os mesmos princípios deste arquivo. Em caso de conflito, **este arquivo (`CLAUDE.md`) é a fonte mais detalhada e prevalece** — a constituição existe para as skills do Spec Kit (`/speckit-plan`, `/speckit-tasks` etc.) terem um resumo de alto nível. Usar as skills do Spec Kit é opcional: o processo abaixo já vale independentemente de qual dessas ferramentas for usada.
+
 ## Processo: Especificar → Planejar → Implementar → Testar
 
 Para qualquer pedido que não seja trivial (uma nova feature, uma mudança de comportamento visível, uma correção de bug não óbvia), siga as quatro etapas abaixo antes de considerar o trabalho concluído. Para pedidos pequenos e inequívocos (ajustar um texto, corrigir um typo, mudar uma cor específica), pode-se ir direto para Implementar + Testar.

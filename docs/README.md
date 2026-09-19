@@ -21,3 +21,4 @@ Cada arquivo abaixo descreve uma funcionalidade do ColorirApp em detalhe: como f
 - [Responsividade e mobile](./responsividade-mobile.md)
 - [Identidade visual](./identidade-visual.md)
 - [Deploy e publicação](./deploy.md)
+- [GitHub Spec Kit](./spec-kit.md)
