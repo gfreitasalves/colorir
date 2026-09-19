@@ -8,11 +8,12 @@ Antes, essas ações ficavam espalhadas na `Toolbar` (barra superior), que cresc
 
 ## Ordem das seções em `Palette.jsx`
 
-1. **Ações**: desfazer, refazer, limpar (ícones de seta curva e lixeira).
-2. **Ferramenta**: balde, borracha, adesivo (ícones de balde, borracha e estrela — o mesmo grupo que antes ficava na `Toolbar`, veja [borracha.md](./borracha.md) e [adesivos.md](./adesivos.md)).
-3. **Zoom**: 100% / 150% / 200% (ícone de lupa — veja [zoom.md](./zoom.md)).
-4. **Terminei!**: dispara a animação de celebração (veja [celebracao.md](./celebracao.md)).
-5. Uma linha divisória, e então a paleta de cores (com o seletor de padrão e o histórico) **ou** a grade de adesivos, dependendo da ferramenta ativa — sem mudança na lógica que já existia, só na posição.
+1. **Paleta de Cores** (com o seletor de padrão de preenchimento, "+ Cor Personalizada", a cor atual e o histórico) **ou** a grade de **Adesivos**, dependendo da ferramenta ativa — vem primeiro para o usuário escolher a cor (ou adesivo) assim que abre o painel, sem precisar rolar.
+2. Uma linha divisória.
+3. **Ações**: desfazer, refazer, limpar (ícones de seta curva e lixeira).
+4. **Ferramenta**: balde, borracha, adesivo (ícones de balde, borracha e estrela — o mesmo grupo que antes ficava na `Toolbar`, veja [borracha.md](./borracha.md) e [adesivos.md](./adesivos.md)).
+5. **Zoom**: 100% / 150% / 200% (ícone de lupa — veja [zoom.md](./zoom.md)).
+6. **Terminei!**: dispara a animação de celebração (veja [celebracao.md](./celebracao.md)).
 
 ## Ícones (`ActionIcons.jsx`)
 
