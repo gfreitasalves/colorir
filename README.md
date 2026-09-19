@@ -22,7 +22,7 @@ Site publicado: https://gfreitasalves.github.io/colorir/
 - **[Restaurar imagem original e salvar/exportar](docs/salvar-exportar.md)** o desenho colorido como PNG.
 - **[Modo escuro](docs/modo-escuro.md)** com preferência salva no navegador.
 - **[Temas de cor da interface](docs/temas-de-interface.md)**: Padrão, Oceano, Flor e Floresta — muda a cor do cabeçalho, barra superior e painel lateral, sem afetar a paleta de pintura.
-- **[Estilo de ateliê](docs/estudio-cavalete-paleta.md)**: a área de desenho fica apoiada sobre um cavalete de pintor, e a seleção de cor ganha aparência de paleta de artista (madeira, formato oval, pingos de tinta).
+- **[Paleta de artista](docs/paleta-de-artista.md)**: a seleção de cor tem formato de paleta de pintor (contorno oval, cores como pingos de tinta), com as cores normais do tema de interface.
 - **[Totalmente responsivo](docs/responsividade-mobile.md)**: no celular a paleta de cores abre como uma gaveta (bottom sheet) e fecha automaticamente assim que uma cor é escolhida; a altura da tela se ajusta corretamente (sem cortar a paleta atrás da barra de endereço do navegador).
 - **[Identidade visual](docs/identidade-visual.md)**: cursor personalizado em formato de pincel, marca d'água decorativa de paletas e pincéis no plano de fundo, e ícones consistentes (decorativos e de ação) em todo o app.
 - **[Painel lateral](docs/painel-lateral.md)**: desfazer, refazer, limpar, ferramenta, zoom e "Terminei!" ficam junto da paleta de cores/adesivos, com ícones intuitivos em vez de emojis — a barra superior fica só com Voltar e Salvar.
