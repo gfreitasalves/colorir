@@ -125,3 +125,45 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/*
+ * Estilo de ateliê (cavalete + paleta de artista): decoração sempre ativa, independente dos temas
+ * de cor de interface (--chrome-*) acima — a madeira do cavalete/paleta não muda com o tema, só
+ * entre claro e escuro (ver research.md da feature 003, Decisão 4).
+ */
+:root {
+  --studio-wood-base: #c68958;
+  --studio-wood-dark: #8b5a2b;
+  --studio-wood-shadow: rgba(59, 33, 13, 0.35);
+  --studio-wood-text: #3a2313;
+}
+
+.dark {
+  --studio-wood-base: #a8703f;
+  --studio-wood-dark: #6b431d;
+  --studio-wood-shadow: rgba(0, 0, 0, 0.55);
+  --studio-wood-text: #fdf3e6;
+}
+
+.studio-wood-surface {
+  background-color: var(--studio-wood-base);
+  background-image:
+    repeating-linear-gradient(100deg, var(--studio-wood-dark) 0px, var(--studio-wood-dark) 2px, transparent 2px, transparent 18px),
+    repeating-linear-gradient(96deg, rgba(255, 255, 255, 0.08) 0px, rgba(255, 255, 255, 0.08) 1px, transparent 1px, transparent 24px),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.14), rgba(0, 0, 0, 0.1));
+  box-shadow:
+    0 6px 16px var(--studio-wood-shadow),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+
+.studio-palette-frame {
+  border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+}
+
+.studio-paint-blob {
+  border-radius: 42% 58% 55% 45% / 45% 42% 58% 55%;
+  box-shadow:
+    inset -2px -3px 4px rgba(0, 0, 0, 0.25),
+    inset 2px 3px 3px rgba(255, 255, 255, 0.35),
+    0 2px 3px rgba(0, 0, 0, 0.25);
+}

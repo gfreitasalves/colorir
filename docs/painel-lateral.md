@@ -8,7 +8,7 @@ Antes, essas ações ficavam espalhadas na `Toolbar` (barra superior), que cresc
 
 ## Ordem das seções em `Palette.jsx`
 
-1. **Paleta de Cores** (com o seletor de padrão de preenchimento, "+ Cor Personalizada", a cor atual e o histórico) **ou** a grade de **Adesivos**, dependendo da ferramenta ativa — vem primeiro para o usuário escolher a cor (ou adesivo) assim que abre o painel, sem precisar rolar.
+1. **Paleta de Cores** (com o seletor de padrão de preenchimento, "+ Cor Personalizada", a cor atual e o histórico) **ou** a grade de **Adesivos**, dependendo da ferramenta ativa — vem primeiro para o usuário escolher a cor (ou adesivo) assim que abre o painel, sem precisar rolar. Desde o [estilo de ateliê](./estudio-cavalete-paleta.md), a "Paleta de Cores" tem aparência de paleta de pintor real (madeira, formato oval, cores como pingos de tinta); a grade de Adesivos mantém a exibição simples de sempre.
 2. Uma linha divisória.
 3. **Ações**: desfazer, refazer, limpar (ícones de seta curva e lixeira).
 4. **Ferramenta**: balde, borracha, adesivo (ícones de balde, borracha e estrela — o mesmo grupo que antes ficava na `Toolbar`, veja [borracha.md](./borracha.md) e [adesivos.md](./adesivos.md)).
