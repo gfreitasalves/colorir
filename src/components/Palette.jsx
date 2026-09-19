@@ -85,78 +85,6 @@ export default function Palette({
 }) {
   return (
     <aside className="flex h-full w-full flex-col gap-4 overflow-y-auto bg-[var(--chrome-bg)] p-4 md:w-56">
-      <div>
-        <span className="mb-1 block text-xs font-medium text-[var(--chrome-text-muted)]">Ações</span>
-        <div className="flex items-center gap-2" role="group" aria-label="Ações">
-          <IconActionButton onClick={onUndo} disabled={!canUndo} label="Desfazer (Ctrl+Z)">
-            <UndoIcon size={20} />
-          </IconActionButton>
-          <IconActionButton onClick={onRedo} disabled={!canRedo} label="Refazer (Ctrl+Shift+Z)">
-            <RedoIcon size={20} />
-          </IconActionButton>
-          <IconActionButton onClick={onReset} label="Limpar / Restaurar imagem original">
-            <TrashIcon size={20} />
-          </IconActionButton>
-        </div>
-      </div>
-
-      <div>
-        <span className="mb-1 block text-xs font-medium text-[var(--chrome-text-muted)]">Ferramenta</span>
-        <div className="flex items-center gap-2" role="group" aria-label="Ferramenta">
-          {TOOLS.map((t) => (
-            <button
-              key={t.id}
-              type="button"
-              onClick={() => onToolChange(t.id)}
-              aria-pressed={tool === t.id}
-              aria-label={t.label}
-              title={t.label}
-              className={`rounded-md border p-2 transition-colors ${
-                tool === t.id
-                  ? 'border-[var(--chrome-accent)] bg-[var(--chrome-accent)] text-[var(--chrome-accent-text)]'
-                  : 'border-[var(--chrome-border-strong)] text-[var(--chrome-text)] hover:bg-[var(--chrome-muted-bg)]'
-              }`}
-            >
-              <t.Icon size={20} />
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <span className="mb-1 block text-xs font-medium text-[var(--chrome-text-muted)]">Zoom</span>
-        <div className="flex items-center gap-1" role="group" aria-label="Zoom">
-          <ZoomIcon size={16} className="mr-1 shrink-0 text-[var(--chrome-text-muted)]" />
-          {ZOOM_LEVELS.map((z) => (
-            <button
-              key={z}
-              type="button"
-              onClick={() => onZoomChange(z)}
-              aria-pressed={Math.abs(zoom - z) < 0.05}
-              className={`rounded-md border px-2 py-1 text-xs font-medium ${
-                Math.abs(zoom - z) < 0.05
-                  ? 'border-[var(--chrome-accent)] bg-[var(--chrome-accent)] text-[var(--chrome-accent-text)]'
-                  : 'border-[var(--chrome-border-strong)] text-[var(--chrome-text)] hover:bg-[var(--chrome-muted-bg)]'
-              }`}
-            >
-              {Math.round(z * 100)}%
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <button
-        type="button"
-        onClick={onCelebrate}
-        aria-label="Terminei de colorir"
-        className="flex items-center justify-center gap-1.5 rounded-md border border-[var(--chrome-accent)] px-3 py-2 text-sm font-medium text-[var(--chrome-accent)] transition-colors hover:bg-[var(--chrome-accent)] hover:text-[var(--chrome-accent-text)]"
-      >
-        <CheckCircleIcon size={18} />
-        Terminei!
-      </button>
-
-      <div className="h-px bg-[var(--chrome-border)]" />
-
       {tool === 'adesivo' ? (
         <div>
           <h2 className="mb-2 flex items-center gap-2 text-sm font-semibold text-[var(--chrome-text)]">
@@ -243,6 +171,78 @@ export default function Palette({
           )}
         </>
       )}
+
+      <div className="h-px bg-[var(--chrome-border)]" />
+
+      <div>
+        <span className="mb-1 block text-xs font-medium text-[var(--chrome-text-muted)]">Ações</span>
+        <div className="flex items-center gap-2" role="group" aria-label="Ações">
+          <IconActionButton onClick={onUndo} disabled={!canUndo} label="Desfazer (Ctrl+Z)">
+            <UndoIcon size={20} />
+          </IconActionButton>
+          <IconActionButton onClick={onRedo} disabled={!canRedo} label="Refazer (Ctrl+Shift+Z)">
+            <RedoIcon size={20} />
+          </IconActionButton>
+          <IconActionButton onClick={onReset} label="Limpar / Restaurar imagem original">
+            <TrashIcon size={20} />
+          </IconActionButton>
+        </div>
+      </div>
+
+      <div>
+        <span className="mb-1 block text-xs font-medium text-[var(--chrome-text-muted)]">Ferramenta</span>
+        <div className="flex items-center gap-2" role="group" aria-label="Ferramenta">
+          {TOOLS.map((t) => (
+            <button
+              key={t.id}
+              type="button"
+              onClick={() => onToolChange(t.id)}
+              aria-pressed={tool === t.id}
+              aria-label={t.label}
+              title={t.label}
+              className={`rounded-md border p-2 transition-colors ${
+                tool === t.id
+                  ? 'border-[var(--chrome-accent)] bg-[var(--chrome-accent)] text-[var(--chrome-accent-text)]'
+                  : 'border-[var(--chrome-border-strong)] text-[var(--chrome-text)] hover:bg-[var(--chrome-muted-bg)]'
+              }`}
+            >
+              <t.Icon size={20} />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <span className="mb-1 block text-xs font-medium text-[var(--chrome-text-muted)]">Zoom</span>
+        <div className="flex items-center gap-1" role="group" aria-label="Zoom">
+          <ZoomIcon size={16} className="mr-1 shrink-0 text-[var(--chrome-text-muted)]" />
+          {ZOOM_LEVELS.map((z) => (
+            <button
+              key={z}
+              type="button"
+              onClick={() => onZoomChange(z)}
+              aria-pressed={Math.abs(zoom - z) < 0.05}
+              className={`rounded-md border px-2 py-1 text-xs font-medium ${
+                Math.abs(zoom - z) < 0.05
+                  ? 'border-[var(--chrome-accent)] bg-[var(--chrome-accent)] text-[var(--chrome-accent-text)]'
+                  : 'border-[var(--chrome-border-strong)] text-[var(--chrome-text)] hover:bg-[var(--chrome-muted-bg)]'
+              }`}
+            >
+              {Math.round(z * 100)}%
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <button
+        type="button"
+        onClick={onCelebrate}
+        aria-label="Terminei de colorir"
+        className="flex items-center justify-center gap-1.5 rounded-md border border-[var(--chrome-accent)] px-3 py-2 text-sm font-medium text-[var(--chrome-accent)] transition-colors hover:bg-[var(--chrome-accent)] hover:text-[var(--chrome-accent-text)]"
+      >
+        <CheckCircleIcon size={18} />
+        Terminei!
+      </button>
     </aside>
   )
 }
